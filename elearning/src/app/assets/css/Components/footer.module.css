@@ -1,0 +1,39 @@
+.footer {
+    padding: 40px 0;
+    background-color: #edf5ff;
+}
+
+.footerContent .ftCol {
+    padding: 20px;
+}
+
+.ftCol h3 {
+    color: #41b294;
+}
+
+button.btnRegis {
+    background-color: #ffc107;
+    font-weight: 500;
+}
+
+button.btnRegis:hover{
+    border: 1px solid #ffc107;
+}
+
+/* Liên hệ */
+.ftScocial i {
+    display: inline-block;
+    text-align: center;
+    background: #acc5ee;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.ftScocial i:hover {
+    background-color: #7e9ecf;
+    transition: all 0.3s;
+}
