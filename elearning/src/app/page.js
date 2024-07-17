@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import NumberCounter from "./components/NumberCounter";
 import { getCourseApi } from "./server/action/course";
 import { Rate } from 'antd';
+import './assets/scss/main.scss'
 
 export default async function Home() {
   const courseList = await getCourseApi();

@@ -1,0 +1,36 @@
+.loginBody {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('/image/1.jpg') no-repeat center / cover;
+}
+
+.login {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.loginFormCheckbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.login .loginFormForgot {
+    text-decoration: none;
+}
+
+.loginFormButton {
+    width: 100%;
+}
+
+.loginRegis {
+    text-decoration: none;
+}
