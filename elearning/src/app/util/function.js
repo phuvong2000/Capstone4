@@ -8,8 +8,15 @@ const getDataTextStorage = (storeName) => {
     return null;
 }
 
+// const getDataJsonStorage = (storeName) => {
+//     if (localStorage.getItem(storeName)){
+//         return JSON.parse(localStorage.getItem(storeName));
+//     }
+//     return null;
+// }
+
 const getDataJsonStorage = (storeName) => {
-    if (localStorage.getItem(storeName)){
+    if (typeof window !== 'undefined' && localStorage.getItem(storeName)) {
         return JSON.parse(localStorage.getItem(storeName));
     }
     return null;

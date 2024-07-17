@@ -1,7 +1,31 @@
-import React from 'react'
-import Link from 'next/link'
-import styles from '../assets/css/Components/header.module.css'
+"use client"
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import styles from '../assets/css/Components/header.module.css';
+import { getDataJsonStorage } from '../util/function';
+import UserDropdown from '../components/UserDropdown/UserDropdown.js';
+
 const Header = () => {
+    const [userLogin, setUserLogin] = useState(null);
+
+    useEffect(() => {
+        const userData = getDataJsonStorage('userLogin');
+        if (userData) {
+            setUserLogin(userData);
+        }
+        else{
+            setUserLogin();
+        }
+    }, []);
+
+    const renderLoginLink = () => {
+        if (userLogin) {
+            return <UserDropdown />;
+        } else {
+            return <Link className='btn btn-warning text-light mx-2' href="/users/dangnhap" role="button">Đăng nhập</Link>;
+        }
+    };
+
     return (
         <header>
             <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar}`}>
@@ -41,14 +65,13 @@ const Header = () => {
                             </button>
                         </form>
                         <div>
-                            {/* Button login, register */}
-                            <Link className='btn btn-warning text-light mx-e' href="/users/dangnhap" role="button">Đăng nhập</Link>
+                            {userLogin !== null && renderLoginLink()}
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
-    )
+    );
 }
 
-export default Header
+export default Header;
