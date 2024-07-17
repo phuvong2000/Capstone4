@@ -3,71 +3,7 @@ import axios from 'axios';
 
 
 const initialState = {
-    courseList: [
-        {
-            "maKhoaHoc": "",
-            "biDanh": "javascriptt",
-            "tenKhoaHoc": "Javascriptt",
-            "moTa": "Rất hay",
-            "luotXem": 100,
-            "hinhAnh": "https://elearningnew.cybersoft.edu.vn/hinhanh/javascriptt_gp01.png",
-            "maNhom": "gp01",
-            "ngayTao": "01/07/2024",
-            "soLuongHocVien": 0,
-            "nguoiTao": {
-                "taiKhoan": "admin_elearning",
-                "hoTen": "Phong Nguyễn",
-                "maLoaiNguoiDung": "GV",
-                "tenLoaiNguoiDung": "Giáo vụ"
-            },
-            "danhMucKhoaHoc": {
-                "maDanhMucKhoahoc": "FrontEnd",
-                "tenDanhMucKhoaHoc": "Lập trình Front end"
-            }
-        },
-        {
-            "maKhoaHoc": "123478",
-            "biDanh": "lap-trinh-elearing-2",
-            "tenKhoaHoc": "lập trình elearing 2",
-            "moTa": "lập trình hay",
-            "luotXem": 100,
-            "hinhAnh": "https://elearningnew.cybersoft.edu.vn/hinhanh/lap-trinh-elearing-2_gp01.jpg",
-            "maNhom": "gp01",
-            "ngayTao": "30/06/2024",
-            "soLuongHocVien": 0,
-            "nguoiTao": {
-                "taiKhoan": "pencilkg123",
-                "hoTen": "Trần Đăng Khoa",
-                "maLoaiNguoiDung": "GV",
-                "tenLoaiNguoiDung": "Giáo vụ"
-            },
-            "danhMucKhoaHoc": {
-                "maDanhMucKhoahoc": "BackEnd",
-                "tenDanhMucKhoaHoc": "Lập trình Backend"
-            }
-        },
-        {
-            "maKhoaHoc": "19872623",
-            "biDanh": "lap-trinh-game-di-dong-new",
-            "tenKhoaHoc": "Lập trình game di động new",
-            "moTa": "b",
-            "luotXem": 100,
-            "hinhAnh": "https://elearningnew.cybersoft.edu.vn/hinhanh/lap-trinh-game-di-dong-new_gp01.png",
-            "maNhom": "gp01",
-            "ngayTao": "29/06/2024",
-            "soLuongHocVien": 0,
-            "nguoiTao": {
-                "taiKhoan": "admin1",
-                "hoTen": "Hoang Phu",
-                "maLoaiNguoiDung": "GV",
-                "tenLoaiNguoiDung": "Giáo vụ"
-            },
-            "danhMucKhoaHoc": {
-                "maDanhMucKhoahoc": "backEnd",
-                "tenDanhMucKhoaHoc": "Lập trình Backend"
-            }
-        },
-    ]
+    courseList: []
 }
 
 const courseReducer = createSlice({
@@ -94,7 +30,29 @@ export const getCourseListApi = () => {
                 TokenCybersoft: tokenCyber
             }
         });
-        const actionPayload = getCourseListAction(res.data.content);
+        const actionPayload = getCourseListAction(res.data);
         dispatch(actionPayload);
+        // console.log(actionPayload)
     }
 };
+
+// export const getCourseListApi = () => {
+//     return async (dispatch) => {
+//         try {
+//             const res = await axios.get('https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc', {
+//                 headers: {
+//                     TokenCybersoft: tokenCyber
+//                 }
+//             });
+//             console.log('API Response:', res.data);  // Kiểm tra phản hồi từ API
+//             if (res.data && res.data.content) {
+//                 const actionPayload = getCourseListAction(res.data.content);
+//                 dispatch(actionPayload);
+//             } else {
+//                 console.error('Invalid API response:', res.data);
+//             }
+//         } catch (error) {
+//             console.error('Error fetching course list:', error);
+//         }
+//     }
+// };

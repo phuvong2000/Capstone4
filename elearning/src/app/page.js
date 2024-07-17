@@ -5,8 +5,12 @@ import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import NumberCounter from "./components/NumberCounter";
+import { getCourseApi } from "./server/action/course";
+import { Rate } from 'antd';
 
-export default function Home() {
+export default async function Home() {
+  const courseList = await getCourseApi();
+  const sortedCourses = courseList.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao)).slice(0, 8);
   return (
     <main>
       <Header></Header>
@@ -15,61 +19,25 @@ export default function Home() {
         <h3>Các khoá học mới nhất</h3>
         <div className="newProd">
           <div className="row">
-          <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-              <Link href="#" className={styles.cardBox}>
-                <div className={`${styles.card} mb-3 card`}>
-                  <img className="card-img-top" src="https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc" alt="Title" />
-                  <div className="card-body">
-                    <h4 className="card-title">Lập trình javascript</h4>
-                    <p className="card-text">400.000đ</p>
+            {/* Render khoá học */}
+            {
+              sortedCourses?.map((course, index) => {
+                return (
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <Link href="#" className={styles.cardBox} key={index}>
+                      <div className={`${styles.card} mb-3 card`}>
+                        <img className="card-img-top" src={course.hinhAnh} alt="Title" />
+                        <div className={`card-body ${styles.cardBody}`}>
+                          <h5 className={`card-title ${styles.cardTitle}`}>{course.tenKhoaHoc}</h5>
+                          <Rate allowHalf defaultValue={4.5} /><span className="card-text px-3">({course.luotXem})</span>
+                        </div>
+                        <div className={styles.overlay}>{course.biDanh}</div>
+                      </div>
+                    </Link>
                   </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-              <Link href="#" className={styles.cardBox}>
-                <div className={`${styles.card} mb-3 card`}>
-                  <img className="card-img-top" src="https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc" alt="Title" />
-                  <div className="card-body">
-                    <h4 className="card-title">Lập trình javascript</h4>
-                    <p className="card-text">400.000đ</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-              <Link href="#" className={styles.cardBox}>
-                <div className={`${styles.card} mb-3 card`}>
-                  <img className="card-img-top" src="https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc" alt="Title" />
-                  <div className="card-body">
-                    <h4 className="card-title">Lập trình javascript</h4>
-                    <p className="card-text">400.000đ</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-              <Link href="#" className={styles.cardBox}>
-                <div className={`${styles.card} mb-3 card`}>
-                  <img className="card-img-top" src="https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc" alt="Title" />
-                  <div className="card-body">
-                    <h4 className="card-title">Lập trình javascript</h4>
-                    <p className="card-text">400.000đ</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-              <Link href="#" className={styles.cardBox}>
-                <div className={`${styles.card} mb-3 card`}>
-                  <img className="card-img-top" src="https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc" alt="Title" />
-                  <div className="card-body">
-                    <h4 className="card-title">Lập trình javascript</h4>
-                    <p className="card-text">400.000đ</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
+                );
+              })
+            }
           </div>
         </div>
       </div>
