@@ -43,7 +43,7 @@ const Header = () => {
                                     <span className="visually-hidden">(current)</span></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" href="#" aria-current="page">Khoá học</Link>
+                                <Link className="nav-link" href='/khoahoc'aria-current="page">Khoá học</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục khoá học</a>
