@@ -2,19 +2,19 @@ import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import { getDataJsonStorage } from '@/app/util/function';
-const userLogin = getDataJsonStorage('userLogin');
-
+import { handleLogout } from '@/app/server/action/users';
+import Link from 'next/link';
 const UserDropdown = () => {
   const userLogin = getDataJsonStorage('userLogin');
 
   // Khai báo items dựa vào maLoaiNguoiDung của userLogin
   let items = [
     {
-      label: <a href="#">Thông tin</a>,
+      label: <Link href='#' className='text-decoration-none'>Thông tin</Link>,
       key: '0',
     },
     {
-      label: <a href="#">Đăng xuất</a>,
+      label: <a onClick={handleLogout}>Đăng xuất</a>,
       key: '1',
     }
   ];
@@ -23,7 +23,7 @@ const UserDropdown = () => {
     items.push({
       type: 'divider'
     }, {
-      label: <a href="#">Trang quản trị</a>,
+      label: <Link href="/admin/quanlykhoahoc" className='text-decoration-none'>Trang quản trị</Link>,
       key: '3'
     });
   }

@@ -20,7 +20,7 @@ const Sidebar = () => {
                     <i className="fas fa-bars" />
                 </button>
             </div>
-            <Link href="/admin/dashboard"><i className="fa fa-home"></i> <span>Trang chủ</span></Link>
+            <Link href="/"><i className="fa fa-home"></i> <span>Trang chủ</span></Link>
             <Link href="/admin/quanlykhoahoc"><i className="fa fa-book"></i> <span>Quản lý khoá học</span></Link>
             <Link href="/admin/quanlynguoidung"><i className="fa fa-user"></i> <span>Quản lý người dùng</span></Link>
         </div>

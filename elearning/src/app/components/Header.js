@@ -39,7 +39,7 @@ const Header = () => {
                     <div className="collapse navbar-collapse px-5" id="collapsibleNavId">
                         <ul className="navbar-nav me-auto mt-2 mt-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active" href="#" aria-current="page">Trang chủ
+                                <Link className="nav-link active" href="/" aria-current="page">Trang chủ
                                     <span className="visually-hidden">(current)</span></Link>
                             </li>
                             <li className="nav-item">

@@ -8,13 +8,6 @@ const getDataTextStorage = (storeName) => {
     return null;
 }
 
-// const getDataJsonStorage = (storeName) => {
-//     if (localStorage.getItem(storeName)){
-//         return JSON.parse(localStorage.getItem(storeName));
-//     }
-//     return null;
-// }
-
 const getDataJsonStorage = (storeName) => {
     if (typeof window !== 'undefined' && localStorage.getItem(storeName)) {
         return JSON.parse(localStorage.getItem(storeName));
@@ -30,4 +23,10 @@ const setDataJsonStorage = (storeName, data) => {
     localStorage.setItem(storeName, JSON.stringify(data));
 }
 
-export { getDataTextStorage, getDataJsonStorage, setDataTextStorage, setDataJsonStorage, TOKEN_AUTHOR }
+const removeDataStorage = (storeName) => {
+    if (typeof window !== 'undefined') {
+        localStorage.removeItem(storeName);
+    }
+}
+
+export { getDataTextStorage, getDataJsonStorage, setDataTextStorage, setDataJsonStorage, removeDataStorage, TOKEN_AUTHOR }

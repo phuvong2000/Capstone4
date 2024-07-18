@@ -1,26 +1,13 @@
 "use client"
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import Link from 'next/link';
 import styles from '../../assets/css/Pages/dangnhap.module.css'
 import { loginActionApi } from '@/app/server/action/users';
 const dangnhap = () => {
   const onFinish = async (values) => {
-    try {
-      const loginData = {
-        taiKhoan: values.taiKhoan,
-        matKhau: values.matKhau
-      };
-      await loginActionApi(loginData.taiKhoan, loginData.matKhau);
-      message.success('Đăng nhập thành công');
-    } catch (error) {
-      if (error.response && error.response.status === 500) {
-        message.error('Tài khoản hoặc mật khẩu không đúng');
-      } else {
-        message.error('Đăng nhập thất bại');
-      }
-    }
+      await loginActionApi(values.taiKhoan, values.matKhau);
   };
   return (
     <div className={`${styles.login}`}>
