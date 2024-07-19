@@ -2,6 +2,12 @@ import { httpApiElearning } from "@/app/util/setting";
 import { TOKEN_AUTHOR, USER_LOGIN, getDataJsonStorage, setDataJsonStorage, setDataTextStorage, removeDataStorage } from "@/app/util/function";
 import { message } from 'antd';
 
+// Lấy danh sách người dùng
+export const getUserApi = async () => {
+  const res = await httpApiElearning.get('/api/QuanLyNguoiDung/LayDanhSachNguoiDung');
+  return res.data;
+}
+
 // Hàm đăng nhập
 export const loginActionApi = async (taiKhoan, matKhau) => {
   try {
