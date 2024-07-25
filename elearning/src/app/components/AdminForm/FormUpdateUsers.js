@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input, Select, message } from 'antd';
 import Link from 'next/link';
-import { addUserApi, getUserTypeApi } from '@/app/server/action/users';
+import { addUserApi, getUserTypeApi, updateUserApi } from '@/app/server/action/users';
+import { useRouter } from 'next/navigation';
 const layout = {
     labelCol: {
         span: 4,
@@ -20,9 +21,14 @@ const validateMessages = {
     },
 };
 
-const ThemNguoiDung = () => {
+const FormUpdateUsers = (props) => {
+    let { userInf } = props;
+    userInf = userInf[0] || {};
+
     const [form] = Form.useForm();
     const [userTypes, setUserTypes] = useState([]);
+
+    const router = useRouter()
 
     const onFinish = async (values) => {
         try {
@@ -35,8 +41,9 @@ const ThemNguoiDung = () => {
                 maNhom: 'GP01',
                 email: values.email
             }
-            addUserApi(users);
-            form.resetFields();
+            // console.log(users)
+            updateUserApi(users);
+            router.push('/admin/quanlynguoidung');
         } catch {
             console.log('Thêm khoá học thất bại')
         }
@@ -58,8 +65,7 @@ const ThemNguoiDung = () => {
 
     return (
         <div>
-            <h1 style={{ marginBottom: '40px' }}>Thêm người dùng</h1>
-            {/* Form thêm người dùng */}
+            {/* Form thêm, sửa người dùng */}
             <Form
                 form={form}
                 {...layout}
@@ -69,6 +75,14 @@ const ThemNguoiDung = () => {
                     maxWidth: 1000,
                 }}
                 validateMessages={validateMessages}
+                initialValues={{
+                    taiKhoan: userInf?.taiKhoan,
+                    matKhau: userInf?.matKhau,
+                    hoTen: userInf?.hoTen,
+                    email: userInf?.email,
+                    soDT: userInf?.soDt,
+                    maLoaiNguoiDung: userInf?.maLoaiNguoiDung,
+                }}
             >
                 {/* Tài khoản */}
                 <Form.Item
@@ -80,7 +94,7 @@ const ThemNguoiDung = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input disabled/>
                 </Form.Item>
                 {/* Mật khẩu */}
                 <Form.Item
@@ -155,18 +169,12 @@ const ThemNguoiDung = () => {
                     }}
                 >
                     <Button className='me-2' type="primary" htmlType="submit">
-                        Thêm người dùng
-                    </Button>
-                    <Button danger onClick={() => form.resetFields()}>
-                        Reset
+                        Lưu
                     </Button>
                 </Form.Item>
             </Form>
-            <Link href="/admin/quanlynguoidung" className='text-decoration-none'>
-                <i className="fa fa-arrow-left"></i> Quay lại trang trước
-            </Link>
         </div>
     )
 }
 
-export default ThemNguoiDung
+export default FormUpdateUsers

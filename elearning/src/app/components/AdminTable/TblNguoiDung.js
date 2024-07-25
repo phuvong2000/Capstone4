@@ -1,9 +1,12 @@
-"use client"
-import React from 'react'
-import Link from 'next/link'
-import { Space, Table, Tag } from 'antd';
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Space, Table, Input, Row, Col, message } from 'antd';
+import { delUserApi, getUserApi } from '@/app/server/action/users';
+import Link from 'next/link';
 
-const columns = [
+const { Search } = Input;
+
+const columns = (fetchData) => [
     {
         title: 'STT',
         dataIndex: 'stt',
@@ -40,19 +43,72 @@ const columns = [
         key: 'action',
         render: (_, record) => (
             <Space size="middle">
-                <a className='btn btn-primary'>Ghi danh</a>
-                <a className='btn btn-warning'>Sửa</a>
-                <a className='btn btn-danger'>Xoá</a>
+                <Link href={`quanlynguoidung/ghidanhhocvien/${record.taiKhoan}`} className='btn btn-primary'>Ghi danh</Link>
+                <Link href={`quanlynguoidung/suanguoidung/${record.taiKhoan}`} className='btn btn-warning'>Sửa</Link>
+                <button
+                    className='btn btn-danger'
+                    onClick={async () => {
+                        if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
+                            try {
+                                await delUserApi(record.taiKhoan);
+                                fetchData(); // Reload data after deletion
+                            } catch (error) {
+                                message.error('Xóa người dùng không thành công');
+                            }
+                        }
+                    }}
+                >
+                    Xoá
+                </button>
             </Space>
         ),
     },
 ];
 
-const TblNguoiDung = (props) => {
-    const { userList } = props;
-    return (
-        <Table columns={columns} dataSource={userList} rowKey="taiKhoan" scroll={{ x: 'max-content' }} />
-    )
-}
+const TblNguoiDung = () => {
+    const [userList, setUserList] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
 
-export default TblNguoiDung
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleSearch = (value) => {
+        const filtered = userList.filter(user =>
+            user.taiKhoan.toLowerCase().includes(value.toLowerCase()) ||
+            user.hoTen.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredData(filtered);
+        setSearchText(value);
+    };
+
+    const fetchData = async () => {
+        try {
+            const res = await getUserApi();
+            setUserList(res);
+            setFilteredData(res);
+        } catch (error) {
+            message.error('Không thể tải dữ liệu');
+        }
+    };
+
+    return (
+        <>
+            <Row style={{ marginBottom: 16 }}>
+                <Col xs={24} sm={12} md={8} lg={6}>
+                    <Search
+                        placeholder="Tìm kiếm tài khoản hoặc họ tên"
+                        onSearch={handleSearch}
+                        onChange={(e) => handleSearch(e.target.value)}
+                        value={searchText}
+                        enterButton
+                    />
+                </Col>
+            </Row>
+            <Table columns={columns(fetchData)} dataSource={filteredData} rowKey="taiKhoan" scroll={{ x: 'max-content' }} />
+        </>
+    );
+};
+
+export default TblNguoiDung;

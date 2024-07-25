@@ -1,4 +1,6 @@
 import axios from "axios";
+// import { cookies } from 'next/headers'
+import {getDataTextStorage, TOKEN_AUTHOR } from "./function";
 const tokenCyber = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA2NSIsIkhldEhhblN0cmluZyI6IjI1LzExLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTczMjQ5MjgwMDAwMCIsIm5iZiI6MTcwMjMxNDAwMCwiZXhwIjoxNzMyNjQwNDAwfQ._Cum2zMqV8nsbUfpCOe0ILWE_GvP8V8FQnmOR8PRB44";
 
 /* Khai báo interceptor */
@@ -9,8 +11,11 @@ const httpApiElearning = axios.create({
 
 /* Cấu hình interceptor req để gửi đi */
 httpApiElearning.interceptors.request.use((req) => {
+    const token = getDataTextStorage(TOKEN_AUTHOR);
+    // const token = getCookie(TOKEN_AUTHOR);
     req.headers = {
         ...req.headers,
+        Authorization: `Bearer ${token}`,
         TokenCybersoft: tokenCyber
     }
     return req;

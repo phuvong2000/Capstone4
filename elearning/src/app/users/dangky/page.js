@@ -2,7 +2,8 @@
 import React, { useState } from 'react'
 import styles from '../../assets/css/Pages/dangnhap.module.css'
 import Link from 'next/link';
-import { LockOutlined, UserOutlined, MailOutlined, IdcardOutlined } from '@ant-design/icons';
+import { signupActionApi } from '@/app/server/action/users';
+import { LockOutlined, UserOutlined, MailOutlined, IdcardOutlined, PhoneOutlined } from '@ant-design/icons';
 import {
   Button,
   Checkbox,
@@ -11,92 +12,32 @@ import {
   Select,
 } from 'antd';
 const { Option } = Select;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const dangky = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
+    try {
+      const userRegis = {
+        taiKhoan: values.taiKhoan,
+        matKhau: values.matKhau,
+        hoTen: values.hoTen,
+        soDT: values.soDT,
+        maNhom: values.maNhom,
+        email: values.email
+      }
+      signupActionApi(userRegis);
+      form.resetFields();
+    } catch {
+
     }
+    form.resetFields();
   };
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
   return (
     <div className={styles.login}>
       <Form
         form={form}
         name="register"
         onFinish={onFinish}
-        initialValues={{
-          residence: ['zhejiang', 'hangzhou', 'xihu'],
-          prefix: '86',
-        }}
         style={{
           maxWidth: 600,
         }}
@@ -153,7 +94,6 @@ const dangky = () => {
 
         <Form.Item
           name="hoTen"
-          tooltip="What do you want others to call you?"
           rules={[
             {
               required: true,
@@ -162,7 +102,7 @@ const dangky = () => {
             },
           ]}
         >
-          <Input placeholder='Họ tên' prefix={<IdcardOutlined/>} />
+          <Input placeholder='Họ tên' prefix={<IdcardOutlined />} />
         </Form.Item>
 
         <Form.Item
@@ -182,24 +122,24 @@ const dangky = () => {
         </Form.Item>
 
         <Form.Item
-          name="soDt"
+          name="soDT"
           rules={[
             {
               required: true,
               message: 'Số điện thoại không được để trống !',
             },
             {
-              type: "numeber",
-              message: "Số điện thoại phải là số!"
+              pattern: new RegExp(/^[0-9]+$/),
+              message: 'Số điện thoại không hợp lệ!',
             }
           ]}
         >
           <Input
-            addonBefore={prefixSelector}
             style={{
               width: '100%',
             }}
             placeholder='Số điện thoại'
+            prefix={<PhoneOutlined />}
           />
         </Form.Item>
 
@@ -213,9 +153,9 @@ const dangky = () => {
           ]}
         >
           <Select placeholder="Mã nhóm">
-            <Option value="male">GP01</Option>
-            <Option value="female">GP02</Option>
-            <Option value="other">GP03</Option>
+            <Option value="GP01">GP01</Option>
+            <Option value="GP02">GP02</Option>
+            <Option value="GP03">GP03</Option>
           </Select>
         </Form.Item>
 

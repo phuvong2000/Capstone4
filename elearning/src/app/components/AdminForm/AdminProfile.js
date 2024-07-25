@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { Button, Form, Input, Select, message } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 import Link from 'next/link';
-import { addUserApi, getUserTypeApi } from '@/app/server/action/users';
+import { getUserTypeApi } from '@/app/server/action/users';
 const layout = {
     labelCol: {
         span: 4,
@@ -20,7 +20,7 @@ const validateMessages = {
     },
 };
 
-const ThemNguoiDung = () => {
+const AdminProfile = () => {
     const [form] = Form.useForm();
     const [userTypes, setUserTypes] = useState([]);
 
@@ -35,8 +35,7 @@ const ThemNguoiDung = () => {
                 maNhom: 'GP01',
                 email: values.email
             }
-            addUserApi(users);
-            form.resetFields();
+            console.log(users);
         } catch {
             console.log('Thêm khoá học thất bại')
         }
@@ -58,7 +57,7 @@ const ThemNguoiDung = () => {
 
     return (
         <div>
-            <h1 style={{ marginBottom: '40px' }}>Thêm người dùng</h1>
+            <h1 style={{ marginBottom: '40px' }}>Cập nhật thông tin</h1>
             {/* Form thêm người dùng */}
             <Form
                 form={form}
@@ -155,10 +154,7 @@ const ThemNguoiDung = () => {
                     }}
                 >
                     <Button className='me-2' type="primary" htmlType="submit">
-                        Thêm người dùng
-                    </Button>
-                    <Button danger onClick={() => form.resetFields()}>
-                        Reset
+                        Cập nhật thông tin
                     </Button>
                 </Form.Item>
             </Form>
@@ -169,4 +165,4 @@ const ThemNguoiDung = () => {
     )
 }
 
-export default ThemNguoiDung
+export default AdminProfile
