@@ -6,6 +6,7 @@ import {
   setDataTextStorage,
   removeDataStorage,
   createCookie,
+  deleteCookie,
 } from "@/app/util/function";
 import { message } from 'antd';
 import axios from "axios";
@@ -23,14 +24,14 @@ export const getUserApi = async () => {
 // Tìm kiếm người dùng
 export const getUserByName = async (taiKhoan) => {
   try {
-    const res = await httpApiElearning.get(`https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDung?tuKhoa=${taiKhoan}`);
+    const res = await httpApiElearning.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?tuKhoa=${taiKhoan}`);
     return res.data;
   } catch (error) {
     console.log("Error", error)
   }
 }
 
-// Lấy thông tin người dùng ---
+// Lấy thông tin người dùng
 export const getUserInfo = async () => {
   try {
     const res = await httpApiElearning.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
@@ -87,10 +88,31 @@ export const updateUserApi = async (userInf) => {
   }
 }
 
-// Hàm lấy danh sách khoá học chờ xét duyệt
+/* ---------------------------------- Trang ghi danh học viên ---------------------------------- */
+// Hàm lấy danh sách khoá học chờ xét duyệt (13.2.3)
 export const getCourseWaitingApi = async (taiKhoan) => {
   try {
-    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachKhoaHocChoXetDuyet', taiKhoan);
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachKhoaHocChoXetDuyet', { taiKhoan });
+    return res.data;
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+}
+
+// Hàm lấy danh sách khoá học đã ghi danh (13.2.2)
+export const getEnrolledCourseApi = async (taiKhoan) => {
+  try {
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachKhoaHocDaXetDuyet', { taiKhoan });
+    return res.data;
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+}
+
+// Lấy danh sách khoá học chưa ghi danh (13.2.1)
+export const getCourseNotRegis = async (taiKhoan) => {
+  try {
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachKhoaHocChuaGhiDanh', { taiKhoan });
     return res.data;
   } catch (error) {
     console.log('Error: ', error);
@@ -107,13 +129,15 @@ export const getStudentWaitingApi = async (maKhoaHoc) => {
   }
 }
 
+
+/* ---------------------------------- Trang đăng nhập, đăng ký ---------------------------------- */
 // Hàm đăng nhập
 export const loginActionApi = async (taiKhoan, matKhau) => {
   try {
     const res = await httpApiElearning.post('/api/QuanLyNguoiDung/DangNhap', { taiKhoan, matKhau });
     setDataJsonStorage(USER_LOGIN, res.data);
     setDataTextStorage(TOKEN_AUTHOR, res.data.accessToken);
-    createCookie(TOKEN_AUTHOR, res.data.accessToken, 1)
+    createCookie(TOKEN_AUTHOR, res.data.accessToken, 7)
     message.success('Đăng nhập thành công');
     setTimeout(() => {
       window.location.href = '/';
@@ -128,6 +152,7 @@ export const handleLogout = () => {
   message.success('Đã đăng xuất thành công');
   removeDataStorage(TOKEN_AUTHOR);
   removeDataStorage(USER_LOGIN);
+  deleteCookie(TOKEN_AUTHOR);
   setTimeout(() => {
     window.location.href = '/';
   }, 1000);

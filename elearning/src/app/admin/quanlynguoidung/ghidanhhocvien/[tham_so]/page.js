@@ -1,25 +1,22 @@
-// "use client"
 import React from 'react'
 import Link from 'next/link'
-import { getCourseWaitingApi } from '@/app/server/action/users';
-import { cookies } from 'next/headers'
+import { getCourseNotRegis, getCourseWaitingApi, getEnrolledCourseApi } from '@/app/server/action/users';
+import TblGhiDanh from '@/app/components/AdminTable/TblGhiDanh';
 const GhiDanhHocVien = async (props) => {
     const { tham_so } = props.params;
     const khChoXetDuyet = await getCourseWaitingApi(tham_so);
-    console.log(khChoXetDuyet);
+    const khDaGhiDanh = await getEnrolledCourseApi(tham_so);
+    const khChuaGhiDanh = await getCourseNotRegis(tham_so);
     return (
         <div>
-            <h1>
+            <h1 className='text-center pb-3'>
                 Ghi danh học viên
-                : {tham_so}
             </h1>
 
-            {/* Search khoá học */}
+            {/* Table ghi danh và chờ xét duyệt */}
+            <TblGhiDanh khDaGhiDanh={khDaGhiDanh} khChoXetDuyet={khChoXetDuyet} khChuaGhiDanh={khChuaGhiDanh} taiKhoan={tham_so}></TblGhiDanh>
 
-            {/* Table chờ xác thực */}
-
-            {/* Table học viên đã tham gia khoá học */}
-
+            {/* Quay về */}
             <Link href="/admin/quanlynguoidung" className='text-decoration-none'>
                 <i className="fa fa-arrow-left"></i> Quay lại trang trước
             </Link>

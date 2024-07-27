@@ -24,7 +24,7 @@ const Header = () => {
                     <img src="https://i.pravatar.cc?1" width={50} className='rounded-circle' alt="" />
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><Link className="dropdown-item" href="/admin/thongtingv">Cập nhật thông tin</Link></li>
+                    <li><Link className="dropdown-item" href="/admin/thongtinadmin">Cập nhật thông tin</Link></li>
                     <li><a className="dropdown-item" href="#" onClick={
                         handleLogout
                     }>Đăng xuất</a></li>

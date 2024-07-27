@@ -65,10 +65,11 @@ const columns = (fetchData) => [
     },
 ];
 
-const TblNguoiDung = () => {
+const TblNguoiDung = (props) => {
+    const { userData } = props;
     const [userList, setUserList] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredData, setFilteredData] = useState(userData);
 
     useEffect(() => {
         fetchData();

@@ -16,7 +16,7 @@ const quanlynguoidung = async () => {
       </div>
 
       {/* Bảng danh sách */}
-      <TblNguoiDung userList={userList}></TblNguoiDung>
+      <TblNguoiDung userData={userList}></TblNguoiDung>
     </div>
   )
 }

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input, Select } from 'antd';
 import Link from 'next/link';
-import { getUserTypeApi } from '@/app/server/action/users';
+import { getUserInfo, getUserTypeApi, updateUserApi } from '@/app/server/action/users';
 const layout = {
     labelCol: {
         span: 4,
@@ -20,8 +20,10 @@ const validateMessages = {
     },
 };
 
-const AdminProfile = () => {
+const AdminProfile = (props) => {
+    const { thongTin } = props;
     const [form] = Form.useForm();
+    const [thongTinAdmin, setThongTinAdmin] = useState(thongTin);
     const [userTypes, setUserTypes] = useState([]);
 
     const onFinish = async (values) => {
@@ -35,11 +37,33 @@ const AdminProfile = () => {
                 maNhom: 'GP01',
                 email: values.email
             }
-            console.log(users);
+            updateUserApi(users);
         } catch {
-            console.log('Thêm khoá học thất bại')
+            console.log('Cập nhật thông tin thất bại')
         }
     };
+
+    
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await getUserInfo();
+                setThongTinAdmin(res);
+                form.setFieldsValue({
+                    taiKhoan: res?.taiKhoan,
+                    matKhau: res?.matKhau,
+                    hoTen: res?.hoTen,
+                    email: res?.email,
+                    soDT: res?.soDT,
+                    maLoaiNguoiDung: res?.maLoaiNguoiDung,
+                });
+            } catch (error) {
+                message.error('Không thể tải dữ liệu');
+            }
+        }
+        fetchUser();
+    }, [])
 
     useEffect(() => {
         const fetchUserTypes = async () => {
@@ -57,7 +81,6 @@ const AdminProfile = () => {
 
     return (
         <div>
-            <h1 style={{ marginBottom: '40px' }}>Cập nhật thông tin</h1>
             {/* Form thêm người dùng */}
             <Form
                 form={form}
@@ -68,6 +91,14 @@ const AdminProfile = () => {
                     maxWidth: 1000,
                 }}
                 validateMessages={validateMessages}
+                initialValues={{
+                    taiKhoan: thongTinAdmin?.taiKhoan,
+                    matKhau: thongTinAdmin?.matKhau,
+                    hoTen: thongTinAdmin?.hoTen,
+                    email: thongTinAdmin?.email,
+                    soDT: thongTinAdmin?.soDT,
+                    maLoaiNguoiDung: thongTinAdmin?.maLoaiNguoiDung,
+                }}
             >
                 {/* Tài khoản */}
                 <Form.Item
@@ -79,7 +110,7 @@ const AdminProfile = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input disabled />
                 </Form.Item>
                 {/* Mật khẩu */}
                 <Form.Item

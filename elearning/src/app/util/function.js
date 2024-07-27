@@ -43,30 +43,17 @@ function createCookie(cookieName, cookieValue, daysToExpire) {
 // createCookie('username', 'l3m0n', 7); 
 
 // ----------------Hàm get cookie----------------
-function getCookie(cookieName, req) {
-    if (!req || !req.headers) {
-        return ''; // Trả về chuỗi rỗng nếu không có đối tượng req hoặc không có thuộc tính headers
-    }
-
-    const name = `${cookieName}=`;
-    const cookies = req.headers.cookie;
-
-    if (!cookies) {
-        return ''; // Trả về chuỗi rỗng nếu không có cookie
-    }
-
-    const cookieArray = cookies.split(';');
-    for (const cookie of cookieArray) {
-        const trimmedCookie = cookie.trim();
-        if (trimmedCookie.indexOf(name) === 0) {
-            return trimmedCookie.substring(name.length);
-        }
-    }
-
-    return ''; // Trả về chuỗi rỗng nếu không tìm thấy cookie
-}
-// const usernameValue = getCookie('username');
-
+// const getTokenFromCookies = (context) => {
+//     const { cookies } = require('next/headers');
+//     return cookies().get(context);
+// };
+const getTokenFromCookies = (context) => {
+    // Import động 'cookies' từ 'next/headers' bên trong hàm
+    const { cookies } = require('next/headers');
+    const cookieStore = cookies();
+    const tokenCookie = cookieStore.get(context);
+    return tokenCookie ? tokenCookie.value : '';
+};
 // ----------------Hàm xoá cookie----------------
 function deleteCookie(cookieName) {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
@@ -81,7 +68,7 @@ export {
     setDataJsonStorage,
     removeDataStorage,
     createCookie,
-    getCookie,
+    getTokenFromCookies,
     deleteCookie,
     TOKEN_AUTHOR
 }

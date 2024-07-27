@@ -5,6 +5,7 @@ import React from 'react'
 
 const SuaNguoiDung = async (props) => {
     const { tham_so } = props.params;
+    console.log(tham_so)
     const userInf  = await getUserByName(tham_so);
     return (
         <div>

@@ -45,7 +45,7 @@ const FormUpdateUsers = (props) => {
             updateUserApi(users);
             router.push('/admin/quanlynguoidung');
         } catch {
-            console.log('Thêm khoá học thất bại')
+            console.log('Cập nhật thất bại')
         }
     };
 
