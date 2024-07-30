@@ -1,16 +1,22 @@
 "use client"
-import { handleLogout } from '@/app/server/action/users'
-import { getDataJsonStorage } from '@/app/util/function'
+import { useRouter } from 'next/navigation'
+import { getUserInfo, handleLogout } from '@/app/server/action/users'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const Header = () => {
-    const [adminProfile, setAdminProfile] = useState(null);
+    const [adminProfile, setAdminProfile] = useState();
+    const router = useRouter();
 
     useEffect(() => {
-        const profile = getDataJsonStorage('userLogin');
-        setAdminProfile(profile);
-    }, []);
+        getUserInfo().then(result => {
+            if (result.maLoaiNguoiDung == 'GV') {
+                setAdminProfile(result);
+            } else {
+                router.push('/not-found');
+            }
+        })
+    }, [])
 
     if (!adminProfile) {
         return null;
@@ -18,7 +24,7 @@ const Header = () => {
 
     return (
         <div className='header-admin d-flex justify-content-end'>
-            <p className='d-flex align-items-center px-2 py-0'>Xin chào {adminProfile.hoTen}!</p>
+            <p className='d-flex align-items-center px-2 py-0'>Chào! {adminProfile.hoTen}</p>
             <div className="dropdown">
                 <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://i.pravatar.cc?1" width={50} className='rounded-circle' alt="" />

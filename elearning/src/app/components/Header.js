@@ -2,25 +2,37 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../assets/css/Components/header.module.css';
-import { getDataJsonStorage } from '../util/function';
+import { getDataJsonStorage, USER_LOGIN } from '../util/function';
 import UserDropdown from '../components/UserDropdown/UserDropdown.js';
+import { getUserInfo } from '../server/action/users';
 
 const Header = () => {
     const [userLogin, setUserLogin] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const isLogin = getDataJsonStorage(USER_LOGIN);
 
     useEffect(() => {
-        const userData = getDataJsonStorage('userLogin');
-        if (userData) {
-            setUserLogin(userData);
+        if (isLogin) {
+            getUserInfo()
+                .then(result => {
+                    setUserLogin(result);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching user info:', error);
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
         }
-        else{
-            setUserLogin();
-        }
-    }, []);
+    }, [isLogin]);
 
     const renderLoginLink = () => {
+        if (loading) {
+            return null;
+        }
         if (userLogin) {
-            return <UserDropdown />;
+            return <UserDropdown userLogin={userLogin} />;
         } else {
             return <Link className='btn btn-warning text-light mx-2' href="/users/dangnhap" role="button">Đăng nhập</Link>;
         }
@@ -43,7 +55,7 @@ const Header = () => {
                                     <span className="visually-hidden">(current)</span></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" href='/khoahoc'aria-current="page">Khoá học</Link>
+                                <Link className="nav-link" href='/khoahoc' aria-current="page">Khoá học</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục khoá học</a>
@@ -65,7 +77,7 @@ const Header = () => {
                             </button>
                         </form>
                         <div>
-                            {userLogin !== null && renderLoginLink()}
+                            {renderLoginLink()}
                         </div>
                     </div>
                 </div>

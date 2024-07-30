@@ -5,13 +5,12 @@ import React from 'react'
 
 const SuaNguoiDung = async (props) => {
     const { tham_so } = props.params;
-    console.log(tham_so)
     const userInf  = await getUserByName(tham_so);
     return (
         <div>
             <h1 className='mb-5 text-center'>Thông tin người dùng</h1>
-            {/* <p>id: {tham_so}</p> */}
-            <FormUpdateUsers userInf={userInf}></FormUpdateUsers>
+            {/* Form update người dùng */}
+            <FormUpdateUsers userInf={userInf} taiKhoanAdmin={tham_so}></FormUpdateUsers>
             <Link href="/admin/quanlynguoidung" className='text-decoration-none'>
                 <i className="fa fa-arrow-left"></i> Quay lại trang trước
             </Link>

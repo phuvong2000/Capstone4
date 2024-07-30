@@ -1,15 +1,18 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import { Button, Form, Input, Select, Row, Col, DatePicker, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
 import moment from 'moment';
-import { addCourseApi } from '@/app/server/action/course';
+import { addCourseApi, getCategoryCourse } from '@/app/server/action/course';
+import { getUserInfo } from '@/app/server/action/users';
 
 const ThemKhoaHoc = () => {
   const [form] = Form.useForm();
   const [numberValue, setNumberValue] = useState(0);
+  const [category, setCategory] = useState([]);
+  const [originator, setOriginator] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleNumberChange = (value) => {
     setNumberValue(value);
@@ -30,33 +33,56 @@ const ThemKhoaHoc = () => {
   };
 
   const handleUpload = (e) => {
-    console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
+    setImageFile(e.file);
     return e && e.fileList;
   };
 
+  useEffect(() => {
+    const fetchCategoryCourse = async () => {
+      const res = await getCategoryCourse();
+      if (res) {
+        const categoryCourse = res.map(value => ({
+          label: value.tenDanhMuc,
+          value: value.maDanhMuc
+        }));
+        setCategory(categoryCourse);
+      }
+    };
+    const fetchOriginator = async () => {
+      const res = await getUserInfo();
+      if (res) {
+        const user = [{
+          label: res.hoTen,
+          value: res.taiKhoan
+        }];
+        setOriginator(user);
+      }
+    }
+    fetchCategoryCourse();
+    fetchOriginator();
+  }, []);
+
   const onFinish = async (values) => {
     try {
-      const courseData = {
-        maKhoaHoc: values.maKhoaHoc,
-        biDanh: values.tenKhoaHoc.replace(/\s+/g, '-').toLowerCase(),
-        tenKhoaHoc: values.tenKhoaHoc,
-        moTa: values.moTa,
-        luotXem: values.luotXem,
-        danhGia: values.danhGia,
-        hinhAnh: values.upload[0]?.name,
-        maNhom: 'GP01',
-        ngayTao: values.ngayTao ? moment(values.ngayTao).format('DD/MM/YYYY') : '',
-        maDanhMucKhoaHoc: values.danhMucKhoaHoc,
-        taiKhoanNguoiTao: values.nguoiTao,
-      };
+      const formData = new FormData();
+      formData.append('maKhoaHoc', values.maKhoaHoc);
+      formData.append('biDanh', values.tenKhoaHoc.replace(/\s+/g, '-').toLowerCase());
+      formData.append('tenKhoaHoc', values.tenKhoaHoc);
+      formData.append('moTa', values.moTa);
+      formData.append('luotXem', values.luotXem);
+      formData.append('danhGia', values.danhGia);
+      formData.append('hinhAnh', imageFile);
+      formData.append('maNhom', 'GP01');
+      formData.append('ngayTao', values.ngayTao ? moment(values.ngayTao).format('DD/MM/YYYY') : '');
+      formData.append('maDanhMucKhoaHoc', values.danhMucKhoaHoc);
+      formData.append('taiKhoanNguoiTao', values.nguoiTao);
 
-      // await addCourseApi(courseData);
-      console.log(courseData);
-      message.success('Thêm khóa học thành công!');
+      await addCourseApi(formData);
       form.resetFields();
+      message.success('Thêm khóa học thành công!');
     } catch (error) {
       console.error('Failed to add course:', error);
       message.error('Thêm khóa học thất bại.');
@@ -75,6 +101,7 @@ const ThemKhoaHoc = () => {
       >
         <Row gutter={24}>
           <Col span={12}>
+            {/* Mã khoá học */}
             <Form.Item
               name="maKhoaHoc"
               label="Mã khoá học"
@@ -82,6 +109,7 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+            {/* Tên khoá học */}
             <Form.Item
               name="tenKhoaHoc"
               label="Tên khoá học"
@@ -89,24 +117,23 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+            {/* Danh mục khoá học */}
             <Form.Item
               name="danhMucKhoaHoc"
               label="Danh mục khoá học"
               rules={[{ required: true, message: 'Hãy chọn danh mục khoá học!' }]}
             >
               <Select
-                options={[
-                  { label: 'Designer', value: 'designer' },
-                  { label: 'Developer', value: 'developer' },
-                  { label: 'Product Manager', value: 'product-manager' },
-                ]}
+                options={category}
               />
             </Form.Item>
+            {/* Ngày tạo */}
             <Form.Item name="ngayTao" label="Ngày tạo">
               <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
           <Col span={12}>
+            {/* Đánh giá */}
             <Form.Item
               name="danhGia"
               label="Đánh giá"
@@ -122,6 +149,7 @@ const ThemKhoaHoc = () => {
                 style={{ width: '100%' }}
               />
             </Form.Item>
+            {/* Lượt xem */}
             <Form.Item
               name="luotXem"
               label="Lượt xem"
@@ -129,26 +157,25 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+            {/* Người tạo */}
             <Form.Item
               name="nguoiTao"
               label="Người tạo"
               rules={[{ required: true, message: 'Hãy chọn người tạo!' }]}
             >
               <Select
-                options={[
-                  { label: 'Designer', value: 'designer' },
-                  { label: 'Developer', value: 'developer' },
-                  { label: 'Product Manager', value: 'product-manager' },
-                ]}
+                options={originator}
               />
             </Form.Item>
+            {/* Upload */}
             <Form.Item
               name="upload"
               label="Upload"
               valuePropName="fileList"
               getValueFromEvent={handleUpload}
+              rules={[{ required: true, message: 'Vui lòng upload hình ảnh!' }]}
             >
-              <Upload name="logo" action="http://localhost:3000" listType="picture">
+              <Upload name="logo" listType="picture" beforeUpload={() => false}>
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
               </Upload>
             </Form.Item>

@@ -8,30 +8,14 @@ const quanlykhoahoc = async () => {
     const courseList = await getCourseApi();
     return (
         <div>
-            <h1 className='mb-3'>Quản lý khoá học</h1>
+            <h1 className='mb-3 text-center'>Quản lý khoá học</h1>
             {/* Btn add course */}
             <Link className="btn btn-primary mb-3" href="quanlykhoahoc/themkhoahoc" role="button">
                 <i className="fa fa-plus"></i> Thêm khoá học
             </Link>
-            {/* Form search */}
-            <form className="search-box mb-5">
-                <div className="input-group" style={{ maxWidth: 600 }}>
-                    <input
-                        type="text"
-                        name="tenkhoahoc"
-                        id="tenkhoahoc"
-                        className="form-control"
-                        placeholder="Nhập vào mã khoá học hoặc tên khoá học"
-                        aria-describedby="helpId"
-                    />
-                    <button type="submit" className="btn btn-primary">
-                        Tìm
-                    </button>
-                </div>
-            </form>
 
             {/* Bảng danh sách */}
-            <TblKhoaHoc courseList={courseList}></TblKhoaHoc>
+            <TblKhoaHoc courseData={courseList}></TblKhoaHoc>
         </div>
     )
 }

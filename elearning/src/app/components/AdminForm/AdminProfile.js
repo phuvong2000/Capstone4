@@ -37,7 +37,7 @@ const AdminProfile = (props) => {
                 maNhom: 'GP01',
                 email: values.email
             }
-            updateUserApi(users);
+            await updateUserApi(users);
         } catch {
             console.log('Cập nhật thông tin thất bại')
         }

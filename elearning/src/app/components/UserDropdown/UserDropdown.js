@@ -4,13 +4,14 @@ import { Dropdown, Space } from 'antd';
 import { getDataJsonStorage } from '@/app/util/function';
 import { handleLogout } from '@/app/server/action/users';
 import Link from 'next/link';
-const UserDropdown = () => {
-  const userLogin = getDataJsonStorage('userLogin');
+const UserDropdown = (props) => {
+  // const userLogin = getDataJsonStorage('userLogin');
+  const { userLogin } = props;
 
   // Khai báo items dựa vào maLoaiNguoiDung của userLogin
   let items = [
     {
-      label: <Link href='#' className='text-decoration-none'>Thông tin</Link>,
+      label: <Link href='/thongtintaikhoan' className='text-decoration-none'>Thông tin</Link>,
       key: '0',
     },
     {

@@ -1,8 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input, Select, message } from 'antd';
-import Link from 'next/link';
-import { addUserApi, getUserTypeApi, updateUserApi } from '@/app/server/action/users';
+import { getUserTypeApi, updateUserApi, getUserByName } from '@/app/server/action/users';
 import { useRouter } from 'next/navigation';
 const layout = {
     labelCol: {
@@ -22,11 +21,12 @@ const validateMessages = {
 };
 
 const FormUpdateUsers = (props) => {
-    let { userInf } = props;
+    let { userInf, taiKhoanAdmin } = props;
     userInf = userInf[0] || {};
 
     const [form] = Form.useForm();
     const [userTypes, setUserTypes] = useState([]);
+    const [user, setUser] = useState(userInf)
 
     const router = useRouter()
 
@@ -41,13 +41,32 @@ const FormUpdateUsers = (props) => {
                 maNhom: 'GP01',
                 email: values.email
             }
-            // console.log(users)
             updateUserApi(users);
             router.push('/admin/quanlynguoidung');
         } catch {
             console.log('Cập nhật thất bại')
         }
     };
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await getUserByName(taiKhoanAdmin);
+                setUser(res);
+                form.setFieldsValue({
+                    taiKhoan: res[0]?.taiKhoan,
+                    matKhau: res[0]?.matKhau,
+                    hoTen: res[0]?.hoTen,
+                    email: res[0]?.email,
+                    soDT: res[0]?.soDt,
+                    maLoaiNguoiDung: res[0]?.maLoaiNguoiDung,
+                });
+            } catch (error) {
+                message.error('Không thể tải dữ liệu');
+            }
+        }
+        fetchUser();
+    }, [])
 
     useEffect(() => {
         const fetchUserTypes = async () => {
@@ -76,12 +95,12 @@ const FormUpdateUsers = (props) => {
                 }}
                 validateMessages={validateMessages}
                 initialValues={{
-                    taiKhoan: userInf?.taiKhoan,
-                    matKhau: userInf?.matKhau,
-                    hoTen: userInf?.hoTen,
-                    email: userInf?.email,
-                    soDT: userInf?.soDt,
-                    maLoaiNguoiDung: userInf?.maLoaiNguoiDung,
+                    taiKhoan: user?.taiKhoan,
+                    matKhau: user?.matKhau,
+                    hoTen: user?.hoTen,
+                    email: user?.email,
+                    soDT: user?.soDt,
+                    maLoaiNguoiDung: user?.maLoaiNguoiDung,
                 }}
             >
                 {/* Tài khoản */}
@@ -94,7 +113,7 @@ const FormUpdateUsers = (props) => {
                         },
                     ]}
                 >
-                    <Input disabled/>
+                    <Input disabled />
                 </Form.Item>
                 {/* Mật khẩu */}
                 <Form.Item

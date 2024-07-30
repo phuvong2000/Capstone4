@@ -1,9 +1,9 @@
 "use client"
-import React from 'react'
-import Link from 'next/link'
-import { Space, Table, Tag } from 'antd';
-import { getCourseApi } from '@/app/server/action/course';
-const columns = [
+import React, { useState, useEffect } from 'react'
+import { Space, Table, Input, Row, Col, message } from 'antd';
+import { delCourseApi, getCourseApi } from '@/app/server/action/course';
+const { Search } = Input;
+const columns = (fetchData) => [
     {
         title: 'STT',
         dataIndex: 'stt',
@@ -43,15 +43,70 @@ const columns = [
             <Space size="middle">
                 <a className='btn btn-primary'>Ghi danh</a>
                 <a className='btn btn-warning'>Sửa</a>
-                <a className='btn btn-danger'>Xoá</a>
+                {/* <a className='btn btn-danger'>Xoá</a> */}
+                <button
+                    className='btn btn-danger'
+                    onClick={async () => {
+                        if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
+                            try {
+                                await delCourseApi(record.maKhoaHoc);
+                                fetchData();
+                            } catch (error) {
+                                message.error('Xóa khoá học không thành công');
+                            }
+                        }
+                    }}
+                >
+                    Xoá
+                </button>
             </Space>
         ),
     },
 ];
 const TblKhoaHoc = (props) => {
-    const { courseList } = props;
+    const { courseData } = props;
+    const [courseList, setCourseList] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [filteredData, setFilteredData] = useState(courseData);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleSearch = (value) => {
+        const filtered = courseList.filter(course =>
+            course.maKhoaHoc.toLowerCase().includes(value.toLowerCase()) ||
+            course.tenKhoaHoc.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredData(filtered);
+        setSearchText(value);
+    };
+
+    const fetchData = async () => {
+        try {
+            const res = await getCourseApi();
+            setCourseList(res);
+            setFilteredData(res);
+        } catch (error) {
+            message.error('Không thể tải dữ liệu');
+        }
+    };
+
     return (
-        <Table columns={columns} dataSource={courseList} rowKey="maKhoaHoc" scroll={{ x: 'max-content' }} />
+        <>
+            <Row style={{ marginBottom: 16 }}>
+                <Col xs={24} sm={12} md={8} lg={6}>
+                    <Search
+                        placeholder="Tìm kiếm mã hoặc tên khoá học"
+                        onSearch={handleSearch}
+                        onChange={(e) => handleSearch(e.target.value)}
+                        value={searchText}
+                        enterButton
+                    />
+                </Col>
+            </Row>
+            <Table columns={columns(fetchData)} dataSource={filteredData} rowKey="maKhoaHoc" scroll={{ x: 'max-content' }} />
+        </>
     )
 }
 

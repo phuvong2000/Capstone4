@@ -1,0 +1,45 @@
+.profMain {
+    margin-top: 87px;
+}
+
+.prof {
+    .profTitle {
+        padding: 40px 0;
+        background-color: #edf5ff;
+        color: #41b294;
+    }
+
+    .profContent {
+        padding: 50px 0;
+
+        .profContentLeft {
+            text-align: center;
+        }
+
+        .profContentRight {
+            .tab-content {
+                padding: 20px 0;
+            }
+        }
+    }
+}
+
+.registeredCourse {
+    .registeredItem {
+        border-bottom: 1px solid #41b294;
+        padding: 10px 0;
+        .courseImg {
+            img {
+                width: 100%;
+                max-width: 150px;
+                max-height: 150px;
+            }
+        }
+        .courseContent{
+            // button{
+            //     float: right;
+            // }
+        }
+    }
+}
+
