@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Space, Table, Select, Form, Button, Row, Col } from 'antd';
-import { cancelCourseApi, registerCourseApi } from '@/app/server/action/course';
+import { cancelCourseApi, enrollCourseApi } from '@/app/server/action/course';
 import { getCourseNotRegis, getCourseWaitingApi } from '@/app/server/action/users';
 import { getEnrolledCourseApi } from '@/app/server/action/users';
 
@@ -25,7 +25,7 @@ const columnChoXacThuc = (taiKhoan, fetchKhChoXetDuyet, fetchKhDaGhiDanh) => [
                 <button className='btn btn-success'
                     onClick={
                         async () => {
-                            await registerCourseApi(record.maKhoaHoc, taiKhoan);
+                            await enrollCourseApi(record.maKhoaHoc, taiKhoan);
                             fetchKhChoXetDuyet();
                             fetchKhDaGhiDanh();
                         }
@@ -33,12 +33,13 @@ const columnChoXacThuc = (taiKhoan, fetchKhChoXetDuyet, fetchKhDaGhiDanh) => [
                     Xác thực
                 </button>
                 <button className='btn btn-danger'
-                    onClick={
-                        async () => {
+                    onClick={async () => {
+                        const confirm = window.confirm("Bạn có chắc chắn muốn huỷ khoá học này?");
+                        if (confirm) {
                             await cancelCourseApi(record.maKhoaHoc, taiKhoan);
                             fetchKhChoXetDuyet();
                         }
-                    }
+                    }}
                 >
                     Huỷ
                 </button>
@@ -65,12 +66,13 @@ const columnDaGhiDanh = (taiKhoan, fetchKhDaGhiDanh) => [
         render: (_, record) => (
             <Space size="middle">
                 <button className='btn btn-danger'
-                    onClick={
-                        async () => {
+                    onClick={async () => {
+                        const confirm = window.confirm("Bạn có chắc chắn muốn huỷ khoá học này?");
+                        if (confirm) {
                             await cancelCourseApi(record.maKhoaHoc, taiKhoan);
                             fetchKhDaGhiDanh();
                         }
-                    }
+                    }}
                 >
                     Huỷ
                 </button>
@@ -132,7 +134,7 @@ const TblGhiDanh = (props) => {
                 taiKhoan: taiKhoan,
                 maKhoaHoc: values.maKhoaHoc
             }
-            await registerCourseApi(ghiDanh.maKhoaHoc, ghiDanh.taiKhoan);
+            await enrollCourseApi(ghiDanh.maKhoaHoc, ghiDanh.taiKhoan);
             fetchKhChoXetDuyet();
             fetchKhDaGhiDanh();
         } catch {

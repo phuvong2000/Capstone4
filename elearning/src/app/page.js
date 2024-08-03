@@ -5,16 +5,17 @@ import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import NumberCounter from "./components/NumberCounter";
-import { getCourseApi } from "./server/action/course";
+import { getCategoryCourse, getCourseApi } from "./server/action/course";
 import { Rate } from 'antd';
-import './assets/scss/main.scss'
+// import './assets/scss/main.scss'
 
 export default async function Home() {
+  const category = await getCategoryCourse();
   const courseList = await getCourseApi();
   const sortedCourses = courseList.sort((a, b) => new Date(b.ngayTao) - new Date(a.ngayTao)).slice(0, 8);
   return (
     <main>
-      <Header></Header>
+      <Header category={category}></Header>
       <Carousel></Carousel>
       <div className={`${styles.homePage} container`}>
         <h3>Các khoá học mới nhất</h3>

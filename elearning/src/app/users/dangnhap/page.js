@@ -1,13 +1,17 @@
 "use client"
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import Link from 'next/link';
 import styles from '../../assets/css/Pages/dangnhap.module.css'
 import { loginActionApi } from '@/app/server/action/users';
+import { useRouter } from 'next/navigation';
 const dangnhap = () => {
+  const router = useRouter();
   const onFinish = async (values) => {
-      await loginActionApi(values.taiKhoan, values.matKhau);
+    await loginActionApi(values.taiKhoan, values.matKhau);
+    message.success('Đăng nhập thành công')
+    router.push('/');
   };
   return (
     <div className={`${styles.login}`}>

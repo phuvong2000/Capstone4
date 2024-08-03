@@ -8,15 +8,34 @@ const Header = () => {
     const [adminProfile, setAdminProfile] = useState();
     const router = useRouter();
 
+    // useEffect(() => {
+    //     getUserInfo().then(result => {
+    //         if (result.maLoaiNguoiDung == 'GV') {
+    //             setAdminProfile(result);
+    //         } else {
+    //             router.push('/not-found');
+    //         }
+    //     })
+    // }, [])
+
     useEffect(() => {
-        getUserInfo().then(result => {
-            if (result.maLoaiNguoiDung == 'GV') {
-                setAdminProfile(result);
-            } else {
+        const checkUser = async () => {
+            try {
+                const result = await getUserInfo();
+
+                if (result && result.maLoaiNguoiDung === 'GV') {
+                    setAdminProfile(result);
+                } else {
+                    router.push('/not-found');
+                }
+            } catch (error) {
+                console.error('Failed to fetch user info:', error);
                 router.push('/not-found');
             }
-        })
-    }, [])
+        };
+
+        checkUser();
+    }, [router]);
 
     if (!adminProfile) {
         return null;
