@@ -175,7 +175,7 @@ const TblGhiDanh = (props) => {
                     <Col xs={24} sm={24} md={8} lg={4}>
                         <Form.Item style={{ marginBottom: 0 }}>
                             <Button type="primary" htmlType="submit">
-                                Submit
+                                Ghi danh
                             </Button>
                         </Form.Item>
                     </Col>

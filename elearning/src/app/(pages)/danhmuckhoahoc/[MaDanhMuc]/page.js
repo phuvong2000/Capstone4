@@ -1,7 +1,6 @@
 import { getCourseByCategoryApi } from '@/app/server/action/course';
 import React from 'react'
-import Link from 'next/link';
-import { Rate, Pagination } from 'antd';
+import CourseCard from '@/app/components/CourseCard';
 const DanhMucKhoaHoc = async (props) => {
     const { MaDanhMuc } = props.params;
     const dsKhoahoc = await getCourseByCategoryApi(MaDanhMuc);
@@ -12,10 +11,9 @@ const DanhMucKhoaHoc = async (props) => {
                     {dsKhoahoc[0].danhMucKhoaHoc.tenDanhMucKhoaHoc}
                 </h1>
             </div>
-            <div className='container'>
+            {/* <div className='container'>
                 <h4 className='mb-3'>Các khoá học phổ biến</h4>
                 <div className="row">
-                    {/* Render khoá học */}
                     {
                         dsKhoahoc?.map((course, index) => {
                             return (
@@ -36,7 +34,8 @@ const DanhMucKhoaHoc = async (props) => {
                     }
                 </div>
                 <Pagination className='d-flex justify-content-center py-5' defaultCurrent={1} total={50} />
-            </div>
+            </div> */}
+            <CourseCard dsKhoahoc={dsKhoahoc}></CourseCard>
         </>
     )
 }

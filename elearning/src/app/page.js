@@ -7,7 +7,10 @@ import Footer from "./components/Footer";
 import NumberCounter from "./components/NumberCounter";
 import { getCategoryCourse, getCourseApi } from "./server/action/course";
 import { Rate } from 'antd';
-// import './assets/scss/main.scss'
+import './assets/scss/main.scss'
+import Feedback from "./components/Feedback";
+import Instructor from "./components/Instructor";
+import Contact from "./components/Contact";
 
 export default async function Home() {
   const category = await getCategoryCourse();
@@ -25,15 +28,15 @@ export default async function Home() {
             {
               sortedCourses?.map((course, index) => {
                 return (
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-                    <Link href="#" className={styles.cardBox} key={index}>
-                      <div className={`${styles.card} mb-3 card`}>
+                  <div className="course col-12 col-md-6 col-lg-4 col-xl-3" key={index}>
+                    <Link href={`/chitiet/${course.maKhoaHoc}`} className='cardBox'>
+                      <div className='mb-3 card'>
                         <img className="card-img-top" src={course.hinhAnh} alt="Title" />
-                        <div className={`card-body ${styles.cardBody}`}>
-                          <h5 className={`card-title ${styles.cardTitle}`}>{course.tenKhoaHoc}</h5>
+                        <div className='card-body'>
+                          <h5 className='card-title'>{course.tenKhoaHoc}</h5>
                           <Rate allowHalf defaultValue={4.5} /><span className="card-text px-3">({course.luotXem})</span>
                         </div>
-                        <div className={styles.overlay}>{course.biDanh}</div>
+                        <div className="ribbon left">Bán chạy</div>
                       </div>
                     </Link>
                   </div>
@@ -44,6 +47,9 @@ export default async function Home() {
         </div>
       </div>
       <NumberCounter></NumberCounter>
+      <Feedback></Feedback>
+      <Instructor></Instructor>
+      <Contact></Contact>
       <Footer></Footer>
     </main>
   );
