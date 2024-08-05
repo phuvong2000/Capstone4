@@ -1,0 +1,38 @@
+.numbercounter {
+    background-color: #edf5ff;
+
+    .number__list {
+        .number__item {
+            border-right: 1px solid #2F5380;
+
+            p {
+                font-size: 46px;
+                font-weight: 600;
+                color: #2F5380;
+            }
+
+            span {
+                font-weight: 500;
+            }
+        }
+
+        .number__item:last-child {
+            border-right: none;
+        }
+    }
+}
+
+
+@media screen and (max-width: 991px) {
+    .numbercounter {
+        .number__list {
+            .number__item {
+                border-right: none;
+                padding: 10px 0;
+                p {
+                    font-size: 35px;
+                }
+            }
+        }
+    }
+}

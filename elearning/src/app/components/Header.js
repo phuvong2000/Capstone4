@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from '../assets/css/Components/header.module.css';
+import '../assets/scss/main.scss'
 import { getDataJsonStorage, USER_LOGIN } from '../util/function';
 import UserDropdown from '../components/UserDropdown/UserDropdown.js';
 import { getUserInfo } from '../server/action/users';
@@ -62,7 +62,7 @@ const Header = (props) => {
 
     return (
         <header>
-            <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar}`}>
+            <nav className='navbar navbar-expand-lg fixed-top navbar'>
                 <div className="container">
                     <Link className="navbar-brand" href="/">
                         <img src='/image/logo.png' className="img-fluid" style={{ maxWidth: '200px', height: 'auto' }} alt="Logo" />
@@ -99,7 +99,7 @@ const Header = (props) => {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <button className="btn btn-outline-warning my-2 my-sm-0" type="submit">
                                 <i className="fa fa-search"></i>
                             </button>
                         </form>

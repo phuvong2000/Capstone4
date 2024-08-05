@@ -3,6 +3,14 @@
     background-color: #ffd60a;
 
     .title_content {
-        color: #ffffff;
+        color: $color-text-2;
+    }
+}
+
+.title-2 {
+    padding: 20px 0;
+
+    .title_content {
+        color: #3d3e5a;
     }
 }

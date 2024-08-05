@@ -8,7 +8,7 @@ const CourseCard = (props) => {
 
     // State for pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize] = useState(8); // Số khoá học mỗi trang
+    const [pageSize] = useState(12); // Số khoá học mỗi trang
 
     // Calculate total pages
     const total = dsKhoahoc.length;
@@ -51,6 +51,7 @@ const CourseCard = (props) => {
                 pageSize={pageSize}
                 total={total}
                 onChange={handlePageChange}
+                showSizeChanger={false} 
             />
         </div>
     );

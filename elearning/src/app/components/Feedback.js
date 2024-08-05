@@ -3,8 +3,8 @@ import React from 'react'
 const Feedback = () => {
     return (
         <div className='container feedback-container'>
-            <div>
-                <h3>Phản hồi của học viên</h3>
+            <div className='title-2'>
+                <h3 className='title_content'>Phản hồi của học viên</h3>
             </div>
             <div className='feedback-content'>
                 <div className='row'>

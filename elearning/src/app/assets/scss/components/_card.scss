@@ -37,7 +37,7 @@
         content: '';
         position: absolute;
         background-color: #41b294;
-        color: white;
+        color: $color-text-2;
         padding: 0 10px;
         width: auto;
         min-height: 30px;
@@ -58,7 +58,7 @@
         // background: #BD1550;
         background: #ffd60a;
         border-bottom: var(--f) solid #0005;
-        color: #fff;
+        color: $color-text-2;
         line-height: 1.3em;
         font-family: sans-serif;
         font-size: 1.2rem;

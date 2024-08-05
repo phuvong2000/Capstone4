@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./page.module.css";
+// import styles from "./page.module.css";
 import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
@@ -20,8 +20,10 @@ export default async function Home() {
     <main>
       <Header category={category}></Header>
       <Carousel></Carousel>
-      <div className={`${styles.homePage} container`}>
-        <h3>Các khoá học mới nhất</h3>
+      <div className='homePage container'>
+        <div className="title-2">
+          <h3 className="title_content">Các khoá học mới nhất</h3>
+        </div>
         <div className="newProd">
           <div className="row">
             {/* Render khoá học */}

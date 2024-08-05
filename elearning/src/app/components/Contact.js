@@ -8,7 +8,7 @@ const Contact = () => {
                     <img src='https://wp.w3layouts.com/studious/wp-content/themes/studious/assets/images/image.png' alt='...'></img>
                 </div>
                 <div className='contact-right col-12 col-md-7'>
-                    <div>
+                    <div className='contact-content'>
                         <h1>
                             Không chắc chắn bắt đầu từ đâu?
                             <br></br>

@@ -3,8 +3,8 @@ import React from 'react'
 const Instructor = () => {
     return (
         <div className='container instructor-container'>
-            <div>
-                <h3>Giảng viên tiềm năng</h3>
+            <div className='title-2'>
+                <h3 className='title_content'>Giảng viên tiềm năng</h3>
             </div>
             <div className='instructor-content'>
                 <div className='row'>

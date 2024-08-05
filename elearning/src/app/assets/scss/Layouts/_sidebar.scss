@@ -1,0 +1,136 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--sidebar-bg);
+    overflow-x: hidden;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    white-space: nowrap;
+
+    &.closed {
+        width: 70px;
+
+        .sidebarHeader h3 {
+            display: none;
+        }
+
+        a span {
+            display: none;
+        }
+
+        ~ #main {
+            margin-left: 70px;
+        }
+    }
+
+    &.open {
+        width: 250px;
+
+        .sidebarHeader h3 {
+            display: block;
+        }
+
+        a span {
+            display: inline;
+        }
+
+        ~ #main {
+            margin-left: 250px;
+        }
+    }
+
+    .sidebarHeader {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #e0e0e0;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+    }
+
+    .toggleBtn {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 20px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+
+    a {
+        padding: 15px 25px;
+        text-decoration: none;
+        font-size: 16px;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--sidebar-hover);
+            color: var(--primary-color);
+        }
+
+        i {
+            min-width: 30px;
+            font-size: 20px;
+        }
+    }
+}
+
+#main {
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+    margin-left: 250px;
+
+    &.sidebar-closed {
+        margin-left: 70px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+
+        .sidebarHeader h3 {
+            display: none;
+        }
+
+        a span {
+            display: none;
+        }
+    }
+
+    #main {
+        margin-left: 70px;
+    }
+
+    .sidebar.open {
+        width: 250px;
+
+        .sidebarHeader h3 {
+            display: block;
+        }
+
+        a span {
+            display: inline;
+        }
+
+        ~ #main {
+            margin-left: 250px;
+        }
+    }
+}
