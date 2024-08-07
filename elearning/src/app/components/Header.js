@@ -1,15 +1,28 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from '../assets/css/Components/header.module.css';
+import '../assets/scss/main.scss'
 import { getDataJsonStorage, USER_LOGIN } from '../util/function';
 import UserDropdown from '../components/UserDropdown/UserDropdown.js';
 import { getUserInfo } from '../server/action/users';
+import { getCategoryCourse } from '../server/action/course';
+import { useRouter } from 'next/navigation';
 
-const Header = () => {
+const Header = (props) => {
+    const { category } = props
     const [userLogin, setUserLogin] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [categoryCourse, setCategoryCourse] = useState(category);
+    const [searchTerm, setSearchTerm] = useState('');
+    const router = useRouter();
+    // Xác thực đã đăng nhập
     const isLogin = getDataJsonStorage(USER_LOGIN);
+
+    useEffect(() => {
+        getCategoryCourse().then(result => {
+            setCategoryCourse(result)
+        })
+    }, [])
 
     useEffect(() => {
         if (isLogin) {
@@ -27,6 +40,7 @@ const Header = () => {
         }
     }, [isLogin]);
 
+    // render ra đăng nhập hoặc tài khoản
     const renderLoginLink = () => {
         if (loading) {
             return null;
@@ -38,9 +52,17 @@ const Header = () => {
         }
     };
 
+    // Tìm kiếm
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            router.push(`/timkiem/${searchTerm}`);
+        }
+    };
+
     return (
         <header>
-            <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar}`}>
+            <nav className='navbar navbar-expand-lg fixed-top navbar'>
                 <div className="container">
                     <Link className="navbar-brand" href="/">
                         <img src='/image/logo.png' className="img-fluid" style={{ maxWidth: '200px', height: 'auto' }} alt="Logo" />
@@ -60,19 +82,24 @@ const Header = () => {
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục khoá học</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdownId">
-                                    <Link className="dropdown-item" href="#">Tất cả khoá học</Link>
-                                    <Link className="dropdown-item" href="#">Lập trình Backend</Link>
-                                    <Link className="dropdown-item" href="#">Thiết kế Web</Link>
-                                    <Link className="dropdown-item" href="#">Lập trình di động</Link>
-                                    <Link className="dropdown-item" href="#">Lập trình Front end</Link>
-                                    <Link className="dropdown-item" href="#">Lập trình Full Stack</Link>
-                                    <Link className="dropdown-item" href="#">Tư duy lập trình</Link>
+                                    {
+                                        categoryCourse?.map((item, index) => {
+                                            return <Link className="dropdown-item" href={`/danhmuckhoahoc/${item.maDanhMuc}`} key={index}>{item.tenDanhMuc}</Link>
+                                        })
+                                    }
                                 </div>
                             </li>
                         </ul>
-                        <form className="d-flex my-2 my-lg-0 me-auto">
-                            <input className="form-control" type="text" placeholder="Tìm kiếm" />
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        {/* Form search */}
+                        <form className="d-flex my-2 my-lg-0 me-auto" onSubmit={handleSearch}>
+                            <input
+                                className="form-control"
+                                type="text"
+                                placeholder="Tìm kiếm"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <button className="btn btn-outline-warning my-2 my-sm-0" type="submit">
                                 <i className="fa fa-search"></i>
                             </button>
                         </form>

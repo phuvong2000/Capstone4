@@ -119,16 +119,35 @@ export const getCourseNotRegis = async (taiKhoan) => {
   }
 }
 
-// Hàm lấy danh sach học viên chờ xác thực ------
+// Hàm lấy danh sach học viên chờ xác thực (13.1.3)
 export const getStudentWaitingApi = async (maKhoaHoc) => {
   try {
-    const res = await httpApiElearning.get('/api/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet', maKhoaHoc);
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet', { maKhoaHoc });
     return res.data;
   } catch (error) {
     console.log('Error: ', error);
   }
 }
 
+// Hàm lấy danh sách học viên đã tham gia khoá học (13.1.2)
+export const getStudentJoinedApi = async (maKhoaHoc) => {
+  try {
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc', { maKhoaHoc });
+    return res.data;
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+}
+
+// Lấy danh sách người dùng chưa ghi danh (13.1.1)
+export const getUserNotRegisApi = async (maKhoaHoc) => {
+  try {
+    const res = await httpApiElearning.post('/api/QuanLyNguoiDung/LayDanhSachNguoiDungChuaGhiDanh', { maKhoaHoc });
+    return res.data;
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+}
 
 /* ---------------------------------- Trang đăng nhập, đăng ký ---------------------------------- */
 // Hàm đăng nhập
@@ -138,10 +157,6 @@ export const loginActionApi = async (taiKhoan, matKhau) => {
     setDataJsonStorage(USER_LOGIN, res.data);
     setDataTextStorage(TOKEN_AUTHOR, res.data.accessToken);
     createCookie(TOKEN_AUTHOR, res.data.accessToken, 7)
-    message.success('Đăng nhập thành công');
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 1000);
   } catch (error) {
     message.error(error.response.data)
   }

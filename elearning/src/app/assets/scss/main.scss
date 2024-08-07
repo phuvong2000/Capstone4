@@ -12,12 +12,23 @@
 @import './Components/button';
 @import './Components/card';
 @import './Components/modal';
+@import './components/title';
+
 // Layouts
 @import "./Layouts/header";
 @import "./Layouts/footer";
 @import "./Layouts/carousel";
+@import "./Layouts/contact";
+@import "./Layouts/instructor";
+@import "./Layouts/feedback";
+@import "./Layouts/numberCounter";
+// @import "./Layouts/sidebar";
 
 // Pages
 @import "./Pages/dangnhap";
 @import "./pages/thongtintaikhoan";
+@import "./pages/danhmuckhoahoc";
+@import "./pages/chitietkhoahoc";
+@import "./pages/timkiem";
+
 // Theme

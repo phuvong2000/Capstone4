@@ -1,0 +1,26 @@
+.feedback-container {
+    padding: 50px 0;
+
+    .feedback-content {
+
+        .feedback-items {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+
+            .card {
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                border: none;
+
+                .card-body {
+                    .card-title {
+                        i {
+                            color: #ff6e65;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

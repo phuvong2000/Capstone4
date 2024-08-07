@@ -43,10 +43,6 @@ function createCookie(cookieName, cookieValue, daysToExpire) {
 // createCookie('username', 'l3m0n', 7); 
 
 // ----------------Hàm get cookie----------------
-// const getTokenFromCookies = (context) => {
-//     const { cookies } = require('next/headers');
-//     return cookies().get(context);
-// };
 const getTokenFromCookies = (context) => {
     // Import động 'cookies' từ 'next/headers' bên trong hàm
     const { cookies } = require('next/headers');

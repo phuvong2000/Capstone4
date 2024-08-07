@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Space, Table, Input, Row, Col, message } from 'antd';
 import { delCourseApi, getCourseApi } from '@/app/server/action/course';
+import Link from 'next/link';
 const { Search } = Input;
 const columns = (fetchData) => [
     {
@@ -41,8 +42,8 @@ const columns = (fetchData) => [
         key: 'action',
         render: (_, record) => (
             <Space size="middle">
-                <a className='btn btn-primary'>Ghi danh</a>
-                <a className='btn btn-warning'>Sửa</a>
+                <Link href={`quanlykhoahoc/ghidanhkhoahoc/${record.maKhoaHoc}`} className='btn btn-primary'>Ghi danh</Link>
+                <Link href={`quanlykhoahoc/suakhoahoc/${record.maKhoaHoc}`} className='btn btn-warning'>Sửa</Link>
                 {/* <a className='btn btn-danger'>Xoá</a> */}
                 <button
                     className='btn btn-danger'
