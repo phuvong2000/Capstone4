@@ -11,6 +11,8 @@ import './assets/scss/main.scss'
 import Feedback from "./components/Feedback";
 import Instructor from "./components/Instructor";
 import Contact from "./components/Contact";
+import BackToTop from "./components/BackToTop";
+
 
 export default async function Home() {
   const category = await getCategoryCourse();
@@ -53,6 +55,7 @@ export default async function Home() {
       <Instructor></Instructor>
       <Contact></Contact>
       <Footer></Footer>
+      <BackToTop></BackToTop>
     </main>
   );
 }
