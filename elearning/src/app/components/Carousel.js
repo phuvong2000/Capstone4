@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from '../assets/css/Components/carousel.module.css'
 const Carousel = () => {
+    
+
     return (
         <div className={`${styles.carousel} container`}>
           <div className='row'>
