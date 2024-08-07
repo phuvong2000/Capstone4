@@ -90,10 +90,10 @@ const onSearch = (value) => {
 };
 
 const TblGhiDanh = (props) => {
-    const { khDaGhiDanh, khChoXetDuyet, khChuaGhiDanh, taiKhoan } = props;
-    const [choXetDuyet, setChoXetDuyet] = useState(khChoXetDuyet);
-    const [daGhiDanh, setDaGhiDanh] = useState(khDaGhiDanh);
-    const [khoaHoc, setkhoaHoc] = useState(khChuaGhiDanh);
+    const { taiKhoan } = props;
+    const [choXetDuyet, setChoXetDuyet] = useState();
+    const [daGhiDanh, setDaGhiDanh] = useState();
+    const [khoaHoc, setkhoaHoc] = useState();
 
     const fetchKhChoXetDuyet = async () => {
         try {
@@ -113,6 +113,12 @@ const TblGhiDanh = (props) => {
         }
     }
 
+    useEffect(() => {
+        fetchKhChoXetDuyet();
+        fetchKhDaGhiDanh();
+    }, [])
+
+    // Set khoá học chưa ghi dánh vào ô select search
     useEffect(() => {
         const fetchkhoaHoc = async () => {
             const courseData = await getCourseNotRegis(taiKhoan);

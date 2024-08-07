@@ -8,8 +8,7 @@ import {
   createCookie,
   deleteCookie,
 } from "@/app/util/function";
-import { message } from 'antd';
-import axios from "axios";
+import { message } from 'antd';  
 
 // Lấy danh sách người dùng
 export const getUserApi = async () => {
@@ -156,9 +155,10 @@ export const loginActionApi = async (taiKhoan, matKhau) => {
     const res = await httpApiElearning.post('/api/QuanLyNguoiDung/DangNhap', { taiKhoan, matKhau });
     setDataJsonStorage(USER_LOGIN, res.data);
     setDataTextStorage(TOKEN_AUTHOR, res.data.accessToken);
-    createCookie(TOKEN_AUTHOR, res.data.accessToken, 7)
+    // createCookie(TOKEN_AUTHOR, res.data.accessToken, 7);
+    return { success: true };
   } catch (error) {
-    message.error(error.response.data)
+    return { success: false, error: error.response?.data };
   }
 };
 
@@ -167,7 +167,7 @@ export const handleLogout = () => {
   message.success('Đã đăng xuất thành công');
   removeDataStorage(TOKEN_AUTHOR);
   removeDataStorage(USER_LOGIN);
-  deleteCookie(TOKEN_AUTHOR);
+  // deleteCookie(TOKEN_AUTHOR);
   setTimeout(() => {
     window.location.href = '/';
   }, 1000);

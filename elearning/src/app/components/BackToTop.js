@@ -19,6 +19,13 @@ const BackToTop = () => {
       {showButton && (
         <button
         style={{
+          position:'fixed',
+          bottom:'50px',
+          right:'50px',
+          height:'50px',
+          width:'50px',
+          borderRadius:'25px',
+
 
         }} onClick={scrollToTop}><i class="fa fa-home"></i></button>
       )}

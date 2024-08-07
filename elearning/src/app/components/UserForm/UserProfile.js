@@ -12,7 +12,6 @@ const layout = {
     },
 };
 
-/* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: '${label} không được để trống!',
     types: {
@@ -153,7 +152,7 @@ const UserProfile = (props) => {
                         <Form.Item
                             wrapperCol={{
                                 ...layout.wrapperCol,
-                                offset: 8,
+                                offset: 6,
                             }}
                         >
                             <Button type="primary" htmlType="submit">

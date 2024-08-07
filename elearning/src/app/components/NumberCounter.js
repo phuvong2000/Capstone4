@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef } from 'react';
 import { CountUp } from 'countup.js';
+import styles from '../assets/css/Layout/numberCounter.module.css';
 
 const NumberCounter = () => {
     const countersRef = useRef([]);
@@ -45,22 +46,22 @@ const NumberCounter = () => {
     }, []);
 
     return (
-        <div className='py-5 my-5 numbercounter'>
-            <div className='number__list container'>
+        <div className={`py-5 my-5 ${styles.numbercounter}`}>
+            <div className={`${styles.number__list} container`}>
                 <div className="row text-center justify-content-center">
-                    <div className='number__item col-12 col-sm-6 col-lg-3'>
+                    <div className={`${styles.number__item} col-12 col-sm-6 col-lg-3`}>
                         <p ref={el => countersRef.current[0] = el} className="counter" data-count="6300">6,300</p>
                         <span>HỌC VIÊN</span>
                     </div>
-                    <div className='number__item col-12 col-sm-6 col-lg-3'>
+                    <div className={`${styles.number__item} col-12 col-sm-6 col-lg-3`}>
                         <p ref={el => countersRef.current[1] = el} className="counter" data-count="638">638</p>
                         <span>KHOÁ HỌC</span>
                     </div>
-                    <div className='number__item col-12 col-sm-6 col-lg-3'>
+                    <div className={`${styles.number__item} col-12 col-sm-6 col-lg-3`}>
                         <p ref={el => countersRef.current[2] = el} className="counter" data-count="7600">7,600</p>
                         <span>GIỜ HỌC</span>
                     </div>
-                    <div className='number__item col-12 col-sm-6 col-lg-3'>
+                    <div className={`${styles.number__item} col-12 col-sm-6 col-lg-3`}>
                         <p ref={el => countersRef.current[3] = el} className="counter" data-count="36">36</p>
                         <span>GIẢNG VIÊN</span>
                     </div>

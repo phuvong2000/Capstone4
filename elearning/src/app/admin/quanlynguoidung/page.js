@@ -1,10 +1,17 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getUserApi } from '@/app/server/action/users'
+import { getUserApi } from '@/app/server/action/users';
 import TblNguoiDung from '@/app/components/AdminTable/TblNguoiDung';
 
-const quanlynguoidung = async () => {
-  const userList = await getUserApi();
+const quanlynguoidung = () => {
+  // const userList = await getUserApi();
+  const [userList, setUserList] = useState([]);
+  useEffect(() => {
+    getUserApi().then(result => {
+      setUserList(result);
+    })
+  }, [])
   return (
     <div>
       <h1 className='mb-3 text-center'>Quản lý người dùng</h1>

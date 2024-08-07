@@ -1,0 +1,117 @@
+.carousel {
+    width: 100%;
+    height: 90vh;
+    margin-top: 75px;
+}
+
+.carousel .carouselLeft {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.carousel .carouselLeft .carouselContent h1 {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #3d3e5a;
+}
+
+.carousel .carouselLeft .carouselContent p {
+    font-size: 1.5rem;
+    padding: 15px 0;
+}
+
+.carousel .carouselLeft .carouselContent .carouselBtn a {
+    font-weight: 500;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+}
+
+.carousel .carouselLeft .carouselContent .carouselBtn .btnXemKh {
+    background-color: #ffc107;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+}
+
+.carousel .carouselLeft .carouselContent .carouselBtn .btnXemKh:hover {
+    background-color: #e6a300; /* darken(#ffc107, 10%) */
+}
+
+.carousel .carouselLeft .carouselContent .carouselBtn .btnTuVan {
+    background-color: #2F5380;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+}
+
+.carousel .carouselLeft .carouselContent .carouselBtn .btnTuVan:hover {
+    background-color: #264264; /* darken(#2F5380, 10%) */
+}
+
+.carousel .carouselImg {
+    width: 100%;
+    height: 100%;
+    background: url("/image/banner2.jpg") no-repeat center / contain;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media screen and (max-width: 1199px) {
+    .carousel .carouselLeft .carouselContent h1 {
+        font-size: 4rem;
+    }
+
+    .carousel .carouselLeft .carouselContent p {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .carousel .carouselLeft .carouselContent h1 {
+        font-size: 3rem;
+    }
+
+    .carousel .carouselLeft .carouselContent p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .carousel .carouselLeft {
+        position: relative;
+        background: url("/image/banner2.jpg") no-repeat center / contain;
+    }
+
+    .carousel .carouselLeft .carouselContent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .carousel .carouselLeft .carouselContent h1 {
+        color: #ffffff;
+        font-size: 2.8rem;
+    }
+
+    .carousel .carouselLeft .carouselContent p {
+        font-size: 1rem;
+    }
+
+    .carousel .carouselImg {
+        display: none;
+    }
+}

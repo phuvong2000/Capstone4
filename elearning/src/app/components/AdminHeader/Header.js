@@ -8,15 +8,15 @@ const Header = () => {
     const [adminProfile, setAdminProfile] = useState();
     const router = useRouter();
 
-    // useEffect(() => {
-    //     getUserInfo().then(result => {
-    //         if (result.maLoaiNguoiDung == 'GV') {
-    //             setAdminProfile(result);
-    //         } else {
-    //             router.push('/not-found');
-    //         }
-    //     })
-    // }, [])
+    useEffect(() => {
+        getUserInfo().then(result => {
+            if (result.maLoaiNguoiDung == 'GV') {
+                setAdminProfile(result);
+            } else {
+                router.push('/not-found');
+            }
+        })
+    }, [])
 
     useEffect(() => {
         const checkUser = async () => {

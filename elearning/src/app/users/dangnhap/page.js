@@ -8,10 +8,15 @@ import { loginActionApi } from '@/app/server/action/users';
 import { useRouter } from 'next/navigation';
 const dangnhap = () => {
   const router = useRouter();
+  // Xử lý đăng nhập
   const onFinish = async (values) => {
-    await loginActionApi(values.taiKhoan, values.matKhau);
-    message.success('Đăng nhập thành công')
-    router.push('/');
+    const result = await loginActionApi(values.taiKhoan, values.matKhau);
+    if (result.success) {
+      message.success('Đăng nhập thành công');
+      router.push('/');
+    } else {
+      message.error(result.error || 'Đăng nhập thất bại');
+    }
   };
   return (
     <div className={`${styles.login}`}>

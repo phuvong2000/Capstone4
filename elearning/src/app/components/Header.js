@@ -1,22 +1,18 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import '../assets/scss/main.scss'
-import { getDataJsonStorage, USER_LOGIN } from '../util/function';
 import UserDropdown from '../components/UserDropdown/UserDropdown.js';
 import { getUserInfo } from '../server/action/users';
+import styles from '../assets/css/Layout/header.module.css';
 import { getCategoryCourse } from '../server/action/course';
 import { useRouter } from 'next/navigation';
 
 const Header = (props) => {
-    const { category } = props
+    const { category } = props;
     const [userLogin, setUserLogin] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [categoryCourse, setCategoryCourse] = useState(category);
     const [searchTerm, setSearchTerm] = useState('');
     const router = useRouter();
-    // Xác thực đã đăng nhập
-    const isLogin = getDataJsonStorage(USER_LOGIN);
 
     useEffect(() => {
         getCategoryCourse().then(result => {
@@ -25,26 +21,17 @@ const Header = (props) => {
     }, [])
 
     useEffect(() => {
-        if (isLogin) {
-            getUserInfo()
-                .then(result => {
-                    setUserLogin(result);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                    setLoading(false);
-                });
-        } else {
-            setLoading(false);
-        }
-    }, [isLogin]);
+        getUserInfo()
+            .then(result => {
+                setUserLogin(result);
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+    }, []);
 
-    // render ra đăng nhập hoặc tài khoản
+    // render ra đăng nhập hoặc tài khoản --
     const renderLoginLink = () => {
-        if (loading) {
-            return null;
-        }
         if (userLogin) {
             return <UserDropdown userLogin={userLogin} />;
         } else {
@@ -62,7 +49,7 @@ const Header = (props) => {
 
     return (
         <header>
-            <nav className='navbar navbar-expand-lg fixed-top navbar'>
+            <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar}`}>
                 <div className="container">
                     <Link className="navbar-brand" href="/">
                         <img src='/image/logo.png' className="img-fluid" style={{ maxWidth: '200px', height: 'auto' }} alt="Logo" />

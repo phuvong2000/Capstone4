@@ -5,7 +5,6 @@ import FormUpdateCourese from '@/app/components/AdminForm/FormUpdateCourse'
 const SuaKhoaHoc = async (props) => {
     const { tham_so } = props.params
     const course = await getCourseByIdApi(tham_so);
-    // console.log(course)
     return (
         <div>
             <p>Id: {tham_so}</p>
