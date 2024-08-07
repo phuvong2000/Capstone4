@@ -94,15 +94,16 @@ const columnDaGhiDanh = (maKhoaHoc, fetchHvDaGhiDanh) => [
 ];
 
 const TblGhiDanhHocVien = (props) => {
-    const { dsHocVienChoXet, dsHocVienDaTG, dsNguoiDungChuaDki, maKhoaHoc } = props;
-    const [hocVienChoXet, setHocVienChoXet] = useState(dsHocVienChoXet);
-    const [hocVienDaTG, setHocVienDaTG] = useState(dsHocVienDaTG);
-    const [nguoiDungChuaDki, setNguoiDungChuaDki] = useState(dsNguoiDungChuaDki);
+    const { maKhoaHoc } = props;
+    const [hocVienChoXet, setHocVienChoXet] = useState();
+    const [hocVienDaTG, setHocVienDaTG] = useState();
+    const [nguoiDungChuaDki, setNguoiDungChuaDki] = useState();
     const [searchTextChoXet, setSearchTextChoXet] = useState('');
     const [searchTextDaGhiDanh, setSearchTextDaGhiDanh] = useState('');
-    const [filteredHvChoXet, setFilteredHvChoXet] = useState(dsHocVienChoXet);
-    const [filteredHvDaTG, setFilteredHvDaTG] = useState(dsHocVienDaTG);
+    const [filteredHvChoXet, setFilteredHvChoXet] = useState();
+    const [filteredHvDaTG, setFilteredHvDaTG] = useState();
 
+    // Lấy ds người dùng chưa đăng ký
     useEffect(() => {
         const fetchNguoiDung = async () => {
             const userData = await getUserNotRegisApi(maKhoaHoc);
@@ -117,6 +118,7 @@ const TblGhiDanhHocVien = (props) => {
         fetchNguoiDung();
     }, [maKhoaHoc]);
 
+    // Lấy ds học viên chờ xét duyệt
     const fetchHvChoXetDuyet = async () => {
         try {
             const res = await getStudentWaitingApi(maKhoaHoc);
@@ -127,6 +129,7 @@ const TblGhiDanhHocVien = (props) => {
         }
     };
 
+    // Lấy ds học viên đã ghi danh
     const fetchHvDaGhiDanh = async () => {
         try {
             const res = await getStudentJoinedApi(maKhoaHoc);
@@ -136,6 +139,11 @@ const TblGhiDanhHocVien = (props) => {
             message.error('Không thể tải dữ liệu');
         }
     };
+
+    useEffect(() => {
+        fetchHvChoXetDuyet();
+        fetchHvDaGhiDanh();
+    }, [])
 
     const onFinish = async (values) => {
         try {

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-// import styles from "./page.module.css";
+import styles from "./assets/css/Components/card.module.css";
+import title from "./assets/css/Components/title.module.css";
 import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import NumberCounter from "./components/NumberCounter";
 import { getCategoryCourse, getCourseApi } from "./server/action/course";
 import { Rate } from 'antd';
-import './assets/scss/main.scss'
 import Feedback from "./components/Feedback";
 import Instructor from "./components/Instructor";
 import Contact from "./components/Contact";
@@ -21,8 +21,8 @@ export default async function Home() {
       <Header category={category}></Header>
       <Carousel></Carousel>
       <div className='homePage container'>
-        <div className="title-2">
-          <h3 className="title_content">Các khoá học mới nhất</h3>
+        <div className={`${title.title2}`}>
+          <h3 className={`${title.title_content}`}>Các khoá học mới nhất</h3>
         </div>
         <div className="newProd">
           <div className="row">
@@ -30,15 +30,15 @@ export default async function Home() {
             {
               sortedCourses?.map((course, index) => {
                 return (
-                  <div className="course col-12 col-md-6 col-lg-4 col-xl-3" key={index}>
-                    <Link href={`/chitiet/${course.maKhoaHoc}`} className='cardBox'>
-                      <div className='mb-3 card'>
+                  <div className={`${styles.course} col-12 col-md-6 col-lg-4 col-xl-3`} key={index}>
+                    <Link href={`/chitiet/${course.maKhoaHoc}`} className={`${styles.cardBox}`}>
+                      <div className={`mb-3 card ${styles.card}`}>
                         <img className="card-img-top" src={course.hinhAnh} alt="Title" />
                         <div className='card-body'>
-                          <h5 className='card-title'>{course.tenKhoaHoc}</h5>
-                          <Rate allowHalf defaultValue={4.5} /><span className="card-text px-3">({course.luotXem})</span>
+                          <h5 className={`card-title ${styles.cardTitle}`}>{course.tenKhoaHoc}</h5>
+                          <Rate allowHalf defaultValue={4.5} disabled /><span className="card-text px-3">({course.luotXem})</span>
                         </div>
-                        <div className="ribbon left">Bán chạy</div>
+                        <div className={`${styles.ribbon} ${styles.left}`}>Bán chạy</div>
                       </div>
                     </Link>
                   </div>

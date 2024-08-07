@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Rate, Pagination } from 'antd';
-
+import styles from '../assets/css/Components/card.module.css';
+import title from '../assets/css/Components/title.module.css';
 const CourseCard = (props) => {
     const { dsKhoahoc } = props;
 
@@ -23,21 +24,23 @@ const CourseCard = (props) => {
 
     return (
         <div className='container'>
-            <h4 className='mb-3'>Các khoá học phổ biến</h4>
+            <div className={`${title.title2}`}>
+                <h3 className={`${title.title_content} mb-3`}>Các khoá học phổ biến</h3>
+            </div>
             <div className="row">
                 {/* Render khoá học */}
                 {
-                    currentData.map((course, index) => {
+                    currentData?.map((course, index) => {
                         return (
-                            <div className="course col-12 col-md-6 col-lg-4 col-xl-3" key={index}>
-                                <Link href={`/chitiet/${course.maKhoaHoc}`} className='cardBox'>
-                                    <div className='mb-3 card'>
+                            <div className={`${styles.course} col-12 col-md-6 col-lg-4 col-xl-3`} key={index}>
+                                <Link href={`/chitiet/${course.maKhoaHoc}`} className={`${styles.cardBox}`}>
+                                    <div className={`mb-3 card ${styles.card}`}>
                                         <img className="card-img-top" src={course.hinhAnh} alt="Title" />
                                         <div className='card-body'>
-                                            <h5 className='card-title'>{course.tenKhoaHoc}</h5>
+                                            <h5 className={`card-title ${styles.cardTitle}`}>{course.tenKhoaHoc}</h5>
                                             <Rate allowHalf defaultValue={4.5} disabled /><span className="card-text px-3">({course.luotXem})</span>
                                         </div>
-                                        <div className="ribbon left">Bán chạy</div>
+                                        <div className={`${styles.ribbon} ${styles.left}`}>Bán chạy</div>
                                     </div>
                                 </Link>
                             </div>
@@ -51,7 +54,7 @@ const CourseCard = (props) => {
                 pageSize={pageSize}
                 total={total}
                 onChange={handlePageChange}
-                showSizeChanger={false} 
+                showSizeChanger={false}
             />
         </div>
     );

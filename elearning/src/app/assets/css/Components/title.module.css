@@ -1,0 +1,16 @@
+.title1 {
+    padding: 40px 0;
+    background-color: #ffd60a;
+}
+
+.title1 .title_content {
+    color: #ffffff; /* Replace $color-text-2 with the actual color code */
+}
+
+.title2 {
+    padding: 20px 0;
+}
+
+.title2 .title_content {
+    color: #3d3e5a;
+}

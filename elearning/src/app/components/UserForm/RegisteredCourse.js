@@ -1,19 +1,20 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import { Rate, Pagination, Input, message } from 'antd';
 import { getUserInfo } from '@/app/server/action/users';
 import { cancelCourseApi } from '@/app/server/action/course';
-
+import styles from '../../assets/css/Pages/thongtintaikhoan.module.css';
+import { useRouter } from 'next/navigation';
 const { Search } = Input;
 
-const RegisteredCourse = (props) => {
-    const { khoaHocThamGia } = props;
-    const khoaHocGhiDanh = khoaHocThamGia.chiTietKhoaHocGhiDanh;
-    const [khoaHoc, setKhoaHoc] = useState(khoaHocGhiDanh);
-    const [filteredCourses, setFilteredCourses] = useState(khoaHocGhiDanh);
+const RegisteredCourse = () => {
+    const [taiKhoan, setTaiKhoan] = useState();
+    const [khoaHoc, setKhoaHoc] = useState([]);
+    const [filteredCourses, setFilteredCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchText, setSearchText] = useState('');
-    const pageSize = 3; // Số lượng khóa học hiển thị trên mỗi trang
+    const pageSize = 3;
+    const router = useRouter();
 
     useEffect(() => {
         fetchUserInfo();
@@ -24,8 +25,10 @@ const RegisteredCourse = (props) => {
             const result = await getUserInfo();
             setKhoaHoc(result.chiTietKhoaHocGhiDanh);
             setFilteredCourses(result.chiTietKhoaHocGhiDanh);
+            setTaiKhoan(result.taiKhoan);
         } catch (error) {
-            console.error('Error fetching user list:', error);
+            // message.error('Lỗi khi tải thông tin người dùng.');
+            router.push('not-found');
         }
     };
 
@@ -40,17 +43,19 @@ const RegisteredCourse = (props) => {
                 course.maKhoaHoc.includes(value) || course.tenKhoaHoc.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredCourses(filtered);
-            setCurrentPage(1); // Reset to first page when searching
+            setCurrentPage(1);
         } else {
             setFilteredCourses(khoaHoc);
         }
     };
 
+    // Huỷ khoá học
     const handleCancelCourse = async (maKhoaHoc) => {
         if (window.confirm('Bạn có chắc chắn muốn huỷ không?')) {
             try {
-                await cancelCourseApi(maKhoaHoc, khoaHocThamGia.taiKhoan);
+                await cancelCourseApi(maKhoaHoc, taiKhoan);
                 await fetchUserInfo();
+                setCurrentPage(1);
             } catch (error) {
                 message.error('Xóa khoá học không thành công');
             }
@@ -62,12 +67,12 @@ const RegisteredCourse = (props) => {
     const currentCourses = filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
 
     return (
-        <div className='registeredCourse'>
+        <div className={`${styles.registeredCourse}`}>
             <div className='row'>
                 <div className='col-12 col-sm-6'>
                     <h3 className='mb-4'>Các khoá học đã tham gia</h3>
                 </div>
-                {/* Form search */}
+                {/* Search Form */}
                 <div className='col-12 col-sm-6'>
                     <Search
                         placeholder="Tìm kiếm mã hoặc tên khoá học"
@@ -79,11 +84,11 @@ const RegisteredCourse = (props) => {
                 </div>
             </div>
             {
-                currentCourses.map((item, index) => (
-                    <div className='registeredItem' key={index}>
+                currentCourses.map((item) => (
+                    <div className={`${styles.registeredItem}`} key={item.maKhoaHoc}>
                         <div className='row mb-3'>
-                            <div className='col-3 courseImg text-center'>
-                                <img src={item.hinhAnh} alt='hình ảnh khoá học'></img>
+                            <div className={`col-3 ${styles.courseImg} text-center`}>
+                                <img src={item.hinhAnh} alt='hình ảnh khoá học' />
                             </div>
                             <div className='col-9 courseContent'>
                                 <h5>{item.tenKhoaHoc}</h5>
@@ -112,6 +117,6 @@ const RegisteredCourse = (props) => {
             />
         </div>
     );
-}
+};
 
 export default RegisteredCourse;

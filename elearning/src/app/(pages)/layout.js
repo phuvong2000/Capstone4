@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import '../assets/scss/main.scss'
+import styles from '../assets/css/Layout/layout.module.css';
 const layout = ({children}) => {
   return (
     <div className='profMain'>
         <Header></Header>
-        <div>
+        <div className={`${styles.main}`}>
             {children}
         </div>
         <Footer></Footer>

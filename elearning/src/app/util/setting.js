@@ -10,40 +10,41 @@ const httpApiElearning = axios.create({
 })
 
 /* Cấu hình interceptor req để gửi đi */
-// httpApiElearning.interceptors.request.use((req) => {
-//     const token = getDataTextStorage(TOKEN_AUTHOR);
-//     // const token = getTokenFromCookies(TOKEN_AUTHOR);
-//     req.headers = {
-//         ...req.headers,
-//         Authorization: `Bearer ${token}`,
-//         TokenCybersoft: tokenCyber
-//     }
-//     return req;
-// }, err => {
-//     return Promise.reject(err);
-// });
-
 httpApiElearning.interceptors.request.use((req) => {
     let token;
-
-    if (typeof window !== 'undefined') {
-        // Môi trường client
-        token = getDataTextStorage(TOKEN_AUTHOR);
-    } else {
-        // Môi trường server
-        token = getTokenFromCookies(TOKEN_AUTHOR);
-    }
-    
+    token = getDataTextStorage(TOKEN_AUTHOR);
     req.headers = {
         ...req.headers,
         Authorization: `Bearer ${token}`,
-        TokenCybersoft: tokenCyber
+        TokenCybersoft: tokenCyber 
     };
 
     return req;
 }, err => {
     return Promise.reject(err);
 });
+
+// httpApiElearning.interceptors.request.use((req) => {
+//     let token;
+
+//     if (typeof window !== 'undefined') {
+//         // Môi trường client
+//         token = getDataTextStorage(TOKEN_AUTHOR);
+//     } else {
+//         // Môi trường server
+//         token = getTokenFromCookies(TOKEN_AUTHOR);
+//     }
+    
+//     req.headers = {
+//         ...req.headers,
+//         Authorization: `Bearer ${token}`,
+//         TokenCybersoft: tokenCyber
+//     };
+
+//     return req;
+// }, err => {
+//     return Promise.reject(err);
+// });
 
 /* Cấu hình intorceptor nhân kết quả trả về */
 httpApiElearning.interceptors.response.use((res) => {

@@ -1,15 +1,15 @@
 import React from 'react'
-
+import styles from '../assets/css/Layout/feedback.module.css';
 const Feedback = () => {
     return (
-        <div className='container feedback-container'>
+        <div className={`container ${styles.feedbackContainer}`}>
             <div className='title-2'>
                 <h3 className='title_content'>Phản hồi của học viên</h3>
             </div>
-            <div className='feedback-content'>
+            <div className={`${styles.feedbackContent}`}>
                 <div className='row'>
-                    <div className='col-12 col-lg-4 col-md-6 feedback-items'>
-                        <div className="card">
+                    <div className={`col-12 col-lg-4 col-md-6 ${styles.feedbackItems}`}>
+                        <div className={`${styles.card} card`}>
                             <div className="card-body">
                                 <h5 className="card-title"><i className="fa fa-quote-left" /></h5>
                                 <p className="card-text">Nội dung khoá học phong phú và được cập nhật thường xuyên. Giảng viên có nhiều kinh nghiệm thực tế, tạo điều kiện cho học viên học hỏi sâu hơn.</p>
@@ -27,8 +27,8 @@ const Feedback = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 col-lg-4 col-md-6 feedback-items'>
-                        <div className="card">
+                    <div className={`col-12 col-lg-4 col-md-6 ${styles.feedbackItems}`}>
+                        <div className={`${styles.card} card`}>
                             <div className="card-body">
                                 <h5 className="card-title"><i className="fa fa-quote-left" /></h5>
                                 <p className="card-text">Khoá học rất bổ ích, giảng viên nhiệt tình và dễ hiểu. Các bài giảng được trình bày rõ ràng, giúp học viên dễ dàng nắm bắt kiến thức.</p>
@@ -46,8 +46,8 @@ const Feedback = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 col-lg-4 feedback-items'>
-                        <div className="card">
+                    <div className={`col-12 col-lg-4 ${styles.feedbackItems}`}>
+                        <div className={`${styles.card} card`}>
                             <div className="card-body">
                                 <h5 className="card-title"><i className="fa fa-quote-left" /></h5>
                                 <p className="card-text">Phương pháp giảng dạy sáng tạo và thực tiễn, giúp học viên tiếp thu kiến thức nhanh chóng và áp dụng vào thực tế hiệu quả.</p>

@@ -1,13 +1,13 @@
 import React from 'react'
-
+import styles from '../assets/css/Layout/contact.module.css';
 const Contact = () => {
     return (
-        <div className='container contact-container'>
+        <div className={`container ${styles.contactContainer}`}>
             <div className='row'>
-                <div className='contact-left col-12 col-md-5'>
+                <div className={`${styles.contactLeft} col-12 col-md-5`}>
                     <img src='https://wp.w3layouts.com/studious/wp-content/themes/studious/assets/images/image.png' alt='...'></img>
                 </div>
-                <div className='contact-right col-12 col-md-7'>
+                <div className={`${styles.contactRight} col-12 col-md-7`}>
                     <div className='contact-content'>
                         <h1>
                             Không chắc chắn bắt đầu từ đâu?

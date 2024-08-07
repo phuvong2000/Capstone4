@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { Rate, message } from 'antd';
 import { getUserInfo } from '../server/action/users';
 import { registerCourseApi } from '../server/action/course';
+import styles from '../assets/css/Pages/chitietkhoahoc.module.css';
+import title from '../assets/css/Components/title.module.css';
 const Detail = (props) => {
     const { chiTietKh } = props;
     const router = useRouter();
@@ -21,18 +23,18 @@ const Detail = (props) => {
             message.error('Vui lòng đăng nhập để đăng ký khoá học!');
             router.push('/users/dangnhap');
         }
-    }; 
+    };
     return (
-        <div className='courseDetail'>
-            <div className='title-1'>
-                <h1 className='title_content container'>Thông tin khoá học</h1>
+        <div className={`${styles.courseDetail}`}>
+            <div className={`${title.title1}`}>
+                <h1 className={`${title.title_content} container`}>Thông tin khoá học</h1>
             </div>
             <div className='container'>
-                <div className='detailContent row d-flex justify-content-center'>
-                    <div className='detailLeft col-12 col-md-8'>
+                <div className={`${styles.detailContent} row d-flex justify-content-center`}>
+                    <div className={`${styles.detailLeft} col-12 col-md-8`}>
                         {/* Title 1 */}
-                        <div className='title-2'>
-                            <h3>{chiTietKh?.tenKhoaHoc || 'N/A'}</h3>
+                        <div className={`${title.title2}`}>
+                            <h3 className={`${title.title_content}`}>{chiTietKh?.tenKhoaHoc || 'N/A'}</h3>
                         </div>
                         {/* Content */}
                         <p>
@@ -47,7 +49,7 @@ const Detail = (props) => {
                         <p>
                             Với phương pháp học tập thực hành và sự hướng dẫn của các giáo viên đầy kinh nghiệm thiết kế thực tế, khóa học này sẽ trang bị cho bạn những kỹ năng cần thiết để bắt đầu sự nghiệp trong lĩnh vực thiết kế web đầy triển vọng, và đặc biệt hoàn toàn phù hợp với người mới bắt đầu làm quen với thiết kế web.
                         </p>
-                        <ul className='detail-list'>
+                        <ul className={`${styles.detailList}`}>
                             <li>
                                 <i className="fa fa-arrow-alt-circle-right"></i> Nắm vững nguyên lý thiết kế layout UI/UX
                             </li>
@@ -204,7 +206,12 @@ const Detail = (props) => {
                                 </h2>
                                 <div id="panelsStayOpen-collapseFive" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
                                     <div className="accordion-body">
-                                        <strong>This is the fifth item's accordion body.</strong> Here you can add detailed guides, FAQs, or step-by-step instructions to assist users in navigating the course or using the resources.
+                                        <ul>
+                                            <li>Khóa học tiêu tốn của bạn 120 giờ và làm hao hụt 7.800.000Đ trong nguồn tài chính</li>
+                                            <li>Chúng tôi sẽ <strong>linh hoạt quỹ thời gian</strong>&nbsp;cho bạn trong trường hợp có sự gián đoạn khi tham gia khóa học</li>
+                                            <li>
+                                                Hỗ trợ &nbsp;<strong><span style={{ color: '#ff0000;' }}>1.100.000đ học phí</span></strong>&nbsp;khi bạn đăng ký online và hoàn tất trước hạn, <strong>học phí chính thức 6.700.000đ</strong></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +224,11 @@ const Detail = (props) => {
                                 </h2>
                                 <div id="panelsStayOpen-collapseSix" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
                                     <div className="accordion-body">
-                                        <strong>This is the sixth item's accordion body.</strong> This section can include information about the instructors, their qualifications, and any other relevant details about their expertise and teaching style.
+                                        <ul>
+                                            <li>Một chương trình học xuyên suốt với giáo trình được biên soạn bài bản, thực hành liên tục giúp các bạn tự hoàn thiện Website của mình trong quá trình học</li>
+                                            <li>Tự do thể hiện sự sáng tạo của bản thân với giao diện Web thật bắt mắt và hợp xu hướng.</li>
+                                            <li>Cơ hội trở thành nhà thiết kế Website thực thụ và tăng thêm thu nhập</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +241,12 @@ const Detail = (props) => {
                                 </h2>
                                 <div id="panelsStayOpen-collapseSeven" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
                                     <div className="accordion-body">
-                                        <strong>This is the seventh item's accordion body.</strong> Use this area to address common questions or concerns that students may have, providing them with quick and easy answers.
+                                        <ul>
+                                            <li>Capstone 1...</li>
+                                            <li>Capstone 2...</li>
+                                            <li>Capstone 3...</li>
+                                            <li>Capstone 4...</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -243,15 +259,18 @@ const Detail = (props) => {
                                 </h2>
                                 <div id="panelsStayOpen-collapseEight" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
                                     <div className="accordion-body">
-                                        <strong>This is the eighth item's accordion body.</strong> Provide contact details or a contact form where students can reach out for additional support or inquiries.
+                                        <ul>
+                                            <li>Thanh toán trực tiếp tại trung tâm</li>
+                                            <li>Chuyển khoản</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* Card right */}
-                    <div className='detailRight col-12 col-md-4'>
-                        <div className="card">
+                    <div className={`${styles.detailRight} col-12 col-md-4`}>
+                        <div className={`card ${styles.card}`}>
                             {/* Hình ảnh */}
                             {/* <img src={chiTietKh.hinhAnh} className="card-img-top" alt="..." /> */}
                             {chiTietKh && chiTietKh.hinhAnh ? (
@@ -269,16 +288,16 @@ const Detail = (props) => {
                             </div>
                             {/* Card-info */}
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
+                                <li className={`list-group-item ${styles.listGroupItem}`}>
                                     Lượt xem: <span>{chiTietKh?.luotXem || 'N/A'}</span>
                                 </li>
-                                <li className="list-group-item">
+                                <li className={`list-group-item ${styles.listGroupItem}`}>
                                     Số lượng học viên: <span>{chiTietKh?.soLuongHocVien || 'N/A'}</span>
                                 </li>
-                                <li className="list-group-item">
+                                <li className={`list-group-item ${styles.listGroupItem}`}>
                                     Giảng viên: <span>{chiTietKh?.nguoiTao?.hoTen || 'N/A'}</span>
                                 </li>
-                                <li className="list-group-item">
+                                <li className={`list-group-item ${styles.listGroupItem}`}>
                                     Ngày tạo: <span>{chiTietKh?.ngayTao || 'N/A'}</span>
                                 </li>
                             </ul>
