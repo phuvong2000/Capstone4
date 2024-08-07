@@ -68,23 +68,35 @@ const FormUpdateCourse = (props) => {
 
   const onFinish = async (values) => {
     try {
-      // const formData = new FormData();
-      // formData.append('maKhoaHoc', values.maKhoaHoc);
-      // formData.append('biDanh', values.tenKhoaHoc.replace(/\s+/g, '-').toLowerCase());
-      // formData.append('tenKhoaHoc', values.tenKhoaHoc);
-      // formData.append('moTa', values.moTa);
-      // formData.append('luotXem', values.luotXem);
-      // formData.append('danhGia', values.danhGia);
+      const formData = new FormData();
+      formData.append('maKhoaHoc', values.maKhoaHoc);
+      formData.append('biDanh', values.tenKhoaHoc.replace(/\s+/g, '-').toLowerCase());
+      formData.append('tenKhoaHoc', values.tenKhoaHoc);
+      formData.append('moTa', values.moTa);
+      formData.append('luotXem', values.luotXem);
+      formData.append('danhGia', values.danhGia);
+      // Kiểm tra và append hinhAnh
+      formData.append('hinhAnh', imageFile || courseDetail?.hinhAnh);
+      formData.append('maNhom', 'GP01');
+      formData.append('ngayTao', values.ngayTao ? moment(values.ngayTao).format('DD/MM/YYYY') : '');
+      formData.append('maDanhMucKhoaHoc', values.danhMucKhoaHoc);
+      formData.append('taiKhoanNguoiTao', values.nguoiTao);
 
-      // // Kiểm tra và append hinhAnh
-      // formData.append('hinhAnh', imageFile);
 
-      // formData.append('maNhom', 'GP01');
-      // formData.append('ngayTao', values.ngayTao ? moment(values.ngayTao).format('DD/MM/YYYY') : '');
-      // formData.append('maDanhMucKhoaHoc', values.danhMucKhoaHoc);
-      // formData.append('taiKhoanNguoiTao', values.nguoiTao);
+      // Xem console
+      // console.log("maKhoaHoc", formData.get('maKhoaHoc'));
+      // console.log("biDanh", formData.get('biDanh'));
+      // console.log("tenKhoaHoc", formData.get('tenKhoaHoc'));
+      // console.log("moTa", formData.get('moTa'));
+      // console.log("luotXem", formData.get('luotXem'));
+      // console.log("danhGia", formData.get('danhGia'));
+      // console.log("hinhAnh", formData.get('hinhAnh'));
+      // console.log("maNhom", formData.get('maNhom'));
+      // console.log("ngayTao", formData.get('ngayTao'));
+      // console.log("maDanhMucKhoaHoc", formData.get('maDanhMucKhoaHoc'));
+      // console.log("taiKhoanNguoiTao", formData.get('taiKhoanNguoiTao'));
 
-      // await updateCourseUploadApi(formData);
+      await updateCourseUploadApi(formData);
 
       // const course = {
       //   maKhoaHoc: values?.maKhoaHoc,
@@ -93,14 +105,14 @@ const FormUpdateCourse = (props) => {
       //   moTa: values?.moTa,
       //   luotXem: values?.luotXem,
       //   danhGia: values?.danhGia,
-      //   hinhAnh: courseDetail?.hinhAnh,
+      //   hinhAnh: imageFile || courseDetail?.hinhAnh,
       //   maNhom: 'GP01',
       //   ngayTao: values?.ngayTao ? moment(values.ngayTao, 'DD/MM/YYYY') : null,
       //   maDanhMucKhoaHoc: values?.danhMucKhoaHoc,
       //   nguoiTao: values?.nguoiTao
       // }
       // console.log(course)
-      // await updateCourseApi(course);
+
 
     } catch (error) {
       console.error('Failed to add course:', error);
