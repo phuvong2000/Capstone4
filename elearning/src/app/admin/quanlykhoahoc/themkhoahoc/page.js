@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 import { Button, Form, Input, Select, Row, Col, DatePicker, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -60,7 +60,7 @@ const ThemKhoaHoc = () => {
         }];
         setOriginator(user);
       }
-    }
+    };
     fetchCategoryCourse();
     fetchOriginator();
   }, []);
@@ -96,11 +96,11 @@ const ThemKhoaHoc = () => {
         form={form}
         onFinish={onFinish}
         scrollToFirstError
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 14 }}
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
       >
         <Row gutter={24}>
-          <Col span={12}>
+          <Col xs={24} sm={12}>
             {/* Mã khoá học */}
             <Form.Item
               name="maKhoaHoc"
@@ -109,6 +109,8 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Tên khoá học */}
             <Form.Item
               name="tenKhoaHoc"
@@ -117,6 +119,8 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Danh mục khoá học */}
             <Form.Item
               name="danhMucKhoaHoc"
@@ -127,12 +131,14 @@ const ThemKhoaHoc = () => {
                 options={category}
               />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Ngày tạo */}
             <Form.Item name="ngayTao" label="Ngày tạo">
               <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={12}>
             {/* Đánh giá */}
             <Form.Item
               name="danhGia"
@@ -149,6 +155,8 @@ const ThemKhoaHoc = () => {
                 style={{ width: '100%' }}
               />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Lượt xem */}
             <Form.Item
               name="luotXem"
@@ -157,6 +165,8 @@ const ThemKhoaHoc = () => {
             >
               <Input />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Người tạo */}
             <Form.Item
               name="nguoiTao"
@@ -167,6 +177,8 @@ const ThemKhoaHoc = () => {
                 options={originator}
               />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             {/* Upload */}
             <Form.Item
               name="upload"
@@ -185,12 +197,12 @@ const ThemKhoaHoc = () => {
           name="moTa"
           label="Mô tả"
           rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
-          labelCol={{ span: 3 }}
-          wrapperCol={{ span: 18 }}
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
         >
           <Input.TextArea rows={6} style={{ width: '100%' }} />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 3, span: 14 }}>
+        <Form.Item wrapperCol={{ span: 24 }}>
           <Button className='me-2' type="primary" htmlType="submit">
             Submit
           </Button>
