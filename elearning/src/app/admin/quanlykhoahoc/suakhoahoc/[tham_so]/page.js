@@ -6,12 +6,11 @@ const SuaKhoaHoc = async (props) => {
     const { tham_so } = props.params
     const course = await getCourseByIdApi(tham_so);
     return (
-        <div>
-            <p>Id: {tham_so}</p>
-            <h1 className='text-center mb-3'>Sửa khoá học</h1>
+        <div style={{ padding: '32px' }}>
+            <h1 style={{ marginBottom: '40px' }} className='text-center' >Sửa khoá học</h1>
             <FormUpdateCourese course={course}></FormUpdateCourese>
             {/* Quay lại trang trước */}
-            <Link href="/admin/quanlykhoahoc" className='text-decoration-none'>
+            <Link href="/admin/quanlykhoahoc" className='text-decoration-none mb-3'>
                 <i className="fa fa-arrow-left"></i> Quay lại trang trước
             </Link>
         </div>

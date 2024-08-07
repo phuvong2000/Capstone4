@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getCategoryCourse, updateCourseApi, updateCourseUploadApi } from '@/app/server/action/course';
 import { getUserInfo } from '@/app/server/action/users';
 
-const FormUpdateCourese = (props) => {
+const FormUpdateCourse = (props) => {
   let { course } = props;
   const [courseDetail, setCourseDetail] = useState(course)
   const [form] = Form.useForm();
@@ -109,13 +109,13 @@ const FormUpdateCourese = (props) => {
   };
 
   return (
-    <div style={{ padding: '32px' }}>
+    <>
       <Form
         form={form}
         onFinish={onFinish}
         scrollToFirstError
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 14 }}
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
         initialValues={{
           maKhoaHoc: courseDetail?.maKhoaHoc,
           biDanh: courseDetail?.biDanh,
@@ -131,8 +131,7 @@ const FormUpdateCourese = (props) => {
         }}
       >
         <Row gutter={24}>
-          <Col span={12}>
-            {/* Mã khoá học */}
+          <Col xs={24} sm={12}>
             <Form.Item
               name="maKhoaHoc"
               label="Mã khoá học"
@@ -140,7 +139,8 @@ const FormUpdateCourese = (props) => {
             >
               <Input />
             </Form.Item>
-            {/* Tên khoá học */}
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="tenKhoaHoc"
               label="Tên khoá học"
@@ -148,26 +148,22 @@ const FormUpdateCourese = (props) => {
             >
               <Input />
             </Form.Item>
-            {/* Danh mục khoá học */}
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="danhMucKhoaHoc"
               label="Danh mục khoá học"
               rules={[{ required: true, message: 'Hãy chọn danh mục khoá học!' }]}
             >
-              <Select
-                options={category}
-              />
-            </Form.Item>
-            {/* Ngày tạo */}
-            <Form.Item name="ngayTao" label="Ngày tạo">
-              <DatePicker
-                style={{ width: '100%' }}
-                format="DD-MM-YYYY"
-              />
+              <Select options={category} />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            {/* Đánh giá */}
+          <Col xs={24} sm={12}>
+            <Form.Item name="ngayTao" label="Ngày tạo">
+              <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="danhGia"
               label="Đánh giá"
@@ -176,7 +172,7 @@ const FormUpdateCourese = (props) => {
               rules={[{ required: true, message: 'Không được để trống đánh giá!' }]}
             >
               <InputNumber
-                type='number'
+                type="number"
                 min={0}
                 max={5}
                 value={numberValue}
@@ -184,7 +180,8 @@ const FormUpdateCourese = (props) => {
                 style={{ width: '100%' }}
               />
             </Form.Item>
-            {/* Lượt xem */}
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="luotXem"
               label="Lượt xem"
@@ -192,28 +189,29 @@ const FormUpdateCourese = (props) => {
             >
               <Input />
             </Form.Item>
-            {/* Người tạo */}
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="nguoiTao"
               label="Người tạo"
               rules={[{ required: true, message: 'Hãy chọn người tạo!' }]}
             >
-              <Select
-                options={creator}
-              />
+              <Select options={creator} />
             </Form.Item>
-            {/* Upload */}
+          </Col>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="upload"
               label="Upload"
               valuePropName="fileList"
               getValueFromEvent={handleUpload}
-            // rules={[{ required: true, message: 'Vui lòng upload hình ảnh!' }]}
             >
               <Upload name="logo" listType="picture" beforeUpload={() => false}>
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
               </Upload>
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
             <Image width={100} src={courseDetail.hinhAnh}></Image>
           </Col>
         </Row>
@@ -221,19 +219,19 @@ const FormUpdateCourese = (props) => {
           name="moTa"
           label="Mô tả"
           rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
-          labelCol={{ span: 3 }}
-          wrapperCol={{ span: 18 }}
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
         >
           <Input.TextArea rows={6} style={{ width: '100%' }} />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 3, span: 14 }}>
+        <Form.Item wrapperCol={{ span: 24 }}>
           <Button className='me-2' type="primary" htmlType="submit">
             Lưu
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </>
   );
 };
 
-export default FormUpdateCourese;
+export default FormUpdateCourse;
