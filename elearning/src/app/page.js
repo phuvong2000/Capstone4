@@ -23,9 +23,11 @@ export default async function Home() {
       <Header category={category}></Header>
       <Carousel></Carousel>
       <div className='homePage container'>
+        {/* Title */}
         <div className={`${title.title2}`}>
-          <h3 className={`${title.title_content}`}>Các khoá học mới nhất</h3>
+          <h3 className={`${title.title_content}`}>Các Khoá Học <span>Mới Nhất</span></h3>
         </div>
+        {/* Content */}
         <div className="newProd">
           <div className="row">
             {/* Render khoá học */}

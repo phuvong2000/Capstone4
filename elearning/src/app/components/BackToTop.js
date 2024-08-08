@@ -27,7 +27,7 @@ const BackToTop = () => {
           borderRadius:'25px',
 
 
-        }} onClick={scrollToTop}><i class="fa fa-home"></i></button>
+        }} onClick={scrollToTop}><i className="fa fa-home"></i></button>
       )}
     </div>
   );

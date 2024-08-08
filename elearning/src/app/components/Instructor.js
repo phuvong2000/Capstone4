@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from '../assets/css/Layout/instructor.module.css';
+import title from '../assets/css/Components/title.module.css';
 const Instructor = () => {
     return (
         <div className={`container ${styles.instructorContainer}`}>
-            <div className='title-2'>
-                <h3 className='title_content'>Giảng viên tiềm năng</h3>
+            <div className={title.title2}>
+                <h3 className={title.title_content}>Giảng Viên <span>Tiềm Năng</span></h3>
             </div>
             <div className={`${styles.instructorContent}`}>
                 <div className='row'>

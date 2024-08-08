@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from '../assets/css/Layout/feedback.module.css';
+import title from '../assets/css/Components/title.module.css';
 const Feedback = () => {
     return (
         <div className={`container ${styles.feedbackContainer}`}>
-            <div className='title-2'>
-                <h3 className='title_content'>Phản hồi của học viên</h3>
+            <div className={title.title2}>
+                <h3 className={title.title_content}>Phản Hồi Của <span>Học Viên</span></h3>
             </div>
             <div className={`${styles.feedbackContent}`}>
                 <div className='row'>

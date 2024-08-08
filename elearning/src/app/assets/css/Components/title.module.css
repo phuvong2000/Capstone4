@@ -4,13 +4,22 @@
 }
 
 .title1 .title_content {
-    color: #ffffff; /* Replace $color-text-2 with the actual color code */
+    color: #ffffff;
+    /* Replace $color-text-2 with the actual color code */
 }
 
 .title2 {
     padding: 20px 0;
+    text-align: center;
 }
 
 .title2 .title_content {
-    color: #3d3e5a;
+    /* color: #3d3e5a; */
+    color: #2F327D;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.title2 .title_content span {
+    color: #00CBB8; 
 }

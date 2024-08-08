@@ -1,19 +1,14 @@
-.numbercounter {
-    background-color: #edf5ff;
-}
-
-.numbercounter .number__list .number__item {
-    border-right: 1px solid #2F5380;
-}
-
 .numbercounter .number__list .number__item p {
-    font-size: 46px;
-    font-weight: 600;
-    color: #2F5380;
+    font-size: 56px;
+    font-weight: 400;
+    background: linear-gradient(90deg, #136CB5, #49BBBD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0px;
 }
 
 .numbercounter .number__list .number__item span {
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .numbercounter .number__list .number__item:last-child {
@@ -25,7 +20,7 @@
         border-right: none;
         padding: 10px 0;
     }
-    
+
     .numbercounter .number__list .number__item p {
         font-size: 35px;
     }
