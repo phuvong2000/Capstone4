@@ -84,7 +84,7 @@
 
 /* SidebarMobile */
 .sidebarMobile {
-    background-color: #333;
+    background-color: #49BBBD;
     color: #fff;
     display: flex;
     justify-content: space-around;
@@ -108,7 +108,7 @@
 }
 
 .sidebarMobile a:hover {
-    background-color: #575757;
+    background-color: #40a09b;
     color: #ddd;
 }
 

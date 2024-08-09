@@ -20,8 +20,8 @@ const BackToTop = () => {
         <button
         style={{
           position:'fixed',
-          bottom:'50px',
-          right:'50px',
+          bottom:'25px',
+          right:'15px',
           height:'50px',
           width:'50px',
           borderRadius:'25px',

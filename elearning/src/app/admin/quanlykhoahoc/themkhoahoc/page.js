@@ -6,6 +6,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { addCourseApi, getCategoryCourse } from '@/app/server/action/course';
 import { getUserInfo } from '@/app/server/action/users';
+import title from '../../../assets/css/Components/title.module.css';
 
 const ThemKhoaHoc = () => {
   const [form] = Form.useForm();
@@ -91,7 +92,9 @@ const ThemKhoaHoc = () => {
 
   return (
     <div style={{ padding: '32px' }}>
-      <h1 style={{ marginBottom: '40px' }}>Thêm khoá học</h1>
+      <div className={title.title2}>
+        <h1 className={`${title.title_content} text-center`}>Thêm khoá học</h1>
+      </div>
       <Form
         form={form}
         onFinish={onFinish}

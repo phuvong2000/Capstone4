@@ -6,6 +6,7 @@ import { getUserInfo } from '../server/action/users';
 import { registerCourseApi } from '../server/action/course';
 import styles from '../assets/css/Pages/chitietkhoahoc.module.css';
 import title from '../assets/css/Components/title.module.css';
+import btn from '../assets/css/Components/button.module.css';
 import Link from 'next/link';
 const Detail = (props) => {
     const { chiTietKh } = props;
@@ -292,7 +293,7 @@ const Detail = (props) => {
                                     <h5 className="card-title">500.000đ</h5><Rate allowHalf defaultValue={4.5} disabled />
                                 </div>
                                 {/* Đăng ký */}
-                                <button className='btn btn-outline-warning w-100 mt-2' onClick={handleRegister}> Đăng ký</button>
+                                <button className={`btn w-100 mt-2 ${btn.buttonSearch}`} onClick={handleRegister}> Đăng ký</button>
                             </div>
                             {/* Card-info */}
                             <ul className="list-group list-group-flush">

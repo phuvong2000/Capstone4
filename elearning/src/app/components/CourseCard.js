@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Rate, Pagination } from 'antd';
 import styles from '../assets/css/Components/card.module.css';
 import title from '../assets/css/Components/title.module.css';
+import btn from '../assets/css/Components/button.module.css';
 const CourseCard = (props) => {
     const { dsKhoahoc } = props;
 
@@ -39,7 +40,7 @@ const CourseCard = (props) => {
                                 <div className={`${styles.cardBox}`}>
                                     <div className={`mb-3 card ${styles.card} ${styles[`index${index}`]}`}>
                                         <Link href={`/chitiet/${course.maKhoaHoc}`} className={styles.cardContent}>
-                                            <img className="card-img-top" src={course.hinhAnh} alt="Title" />
+                                            <img className={`${styles.cardImg} card-img-top`} src={course.hinhAnh} alt="Title" />
                                             <div className="card-body">
                                                 <h5 className={`card-title ${styles.cardTitle}`}>{course.tenKhoaHoc}</h5>
                                                 <small className="card-text pe-2">4.5</small>
@@ -77,7 +78,7 @@ const CourseCard = (props) => {
                                                     <span className={styles.discounted}>500.000đ</span>
                                                     <span className={styles.original}>1.499.000đ</span>
                                                 </p>
-                                                <Link href={`/chitiet/${course.maKhoaHoc}`} className='btn btn-outline-warning w-100'>Xem Chi Tiết</Link>
+                                                <Link href={`/chitiet/${course.maKhoaHoc}`} className={`btn w-100 ${btn.buttonSearch}`}>Xem Chi Tiết</Link>
                                             </div>
                                         </div>
                                     </div>

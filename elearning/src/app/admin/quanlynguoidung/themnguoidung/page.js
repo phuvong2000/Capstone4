@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input, Select, message } from 'antd';
+import title from '../../../assets/css/Components/title.module.css';
 import Link from 'next/link';
 import { addUserApi, getUserTypeApi } from '@/app/server/action/users';
 const layout = {
@@ -58,7 +59,9 @@ const ThemNguoiDung = () => {
 
     return (
         <div>
-            <h1 style={{ marginBottom: '40px' }}>Thêm người dùng</h1>
+            <div className={title.title2}>
+                <h1 className={`${title.title_content} text-center`}>Thêm người dùng</h1>
+            </div>
             {/* Form thêm người dùng */}
             <Form
                 form={form}

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getUserApi } from '@/app/server/action/users';
 import TblNguoiDung from '@/app/components/AdminTable/TblNguoiDung';
-
+import title from '../../assets/css/Components/title.module.css';
+import btn from '../../assets/css/Components/button.module.css';
 const quanlynguoidung = () => {
   // const userList = await getUserApi();
   const [userList, setUserList] = useState([]);
@@ -14,10 +15,12 @@ const quanlynguoidung = () => {
   }, [])
   return (
     <div>
-      <h1 className='mb-3 text-center'>Quản lý người dùng</h1>
+      <div className={title.title2}>
+        <h1 className={`${title.title_content} text-center`}>Quản lý người dùng</h1>
+      </div>
       {/* Btn add user */}
       <div>
-        <Link className="btn btn-primary mb-3" href="quanlynguoidung/themnguoidung" role="button">
+        <Link className={`${btn.buttonBg1} mb-3`} href="quanlynguoidung/themnguoidung" role="button">
           <i className="fa fa-plus"></i> Thêm người dùng
         </Link>
       </div>

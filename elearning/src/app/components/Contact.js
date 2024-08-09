@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../assets/css/Layout/contact.module.css';
+import btn from '../assets/css/Components/button.module.css';
 const Contact = () => {
     return (
         <div className={`container ${styles.contactContainer}`}>
@@ -17,7 +18,7 @@ const Contact = () => {
                         <p>
                             Nếu bạn có bất kỳ câu hỏi hay cần hỗ trợ, xin vui lòng liên hệ với chúng tôi qua biểu mẫu dưới đây. Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất có thể.
                         </p>
-                        <button className='btn btn-danger'>Đăng ký ngay</button>
+                        <button className={btn.buttonBg2}>Đăng ký ngay</button>
                     </div>
                 </div>
             </div>

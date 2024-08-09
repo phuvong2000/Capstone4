@@ -1,4 +1,5 @@
 import FormUpdateUsers from '@/app/components/AdminForm/FormUpdateUsers';
+import title from '../../../../assets/css/Components/title.module.css';
 import { getUserByName } from '@/app/server/action/users';
 import Link from 'next/link';
 import React from 'react'
@@ -8,7 +9,9 @@ const SuaNguoiDung = async (props) => {
     const userInf  = await getUserByName(tham_so);
     return (
         <div>
-            <h1 className='mb-5 text-center'>Thông tin người dùng</h1>
+            <div className={title.title2}>
+                <h1 className={`${title.title_content} text-center`}>Thông tin người dùng</h1>
+            </div>
             {/* Form update người dùng */}
             <FormUpdateUsers userInf={userInf} taiKhoanAdmin={tham_so}></FormUpdateUsers>
             <Link href="/admin/quanlynguoidung" className='text-decoration-none'>

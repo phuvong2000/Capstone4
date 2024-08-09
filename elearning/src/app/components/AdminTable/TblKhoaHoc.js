@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Space, Table, Input, Row, Col, message } from 'antd';
 import { delCourseApi, getCourseApi } from '@/app/server/action/course';
+import btn from '../../assets/css/Components/button.module.css';
 import Link from 'next/link';
 const { Search } = Input;
 const columns = (fetchData) => [
@@ -96,13 +97,17 @@ const TblKhoaHoc = (props) => {
     return (
         <>
             <Row style={{ marginBottom: 16 }}>
-                <Col xs={24} sm={12} md={8} lg={6}>
+                <Col xs={24} sm={24} md={18} lg={12} xl={8}>
                     <Search
                         placeholder="Tìm kiếm mã hoặc tên khoá học"
                         onSearch={handleSearch}
                         onChange={(e) => handleSearch(e.target.value)}
                         value={searchText}
-                        enterButton
+                        enterButton={
+                            <button className={`${btn.buttonSearchAdmin}`}>
+                                Tìm kiếm
+                            </button>
+                        }
                     />
                 </Col>
             </Row>
