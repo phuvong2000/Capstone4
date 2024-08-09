@@ -6,6 +6,7 @@ import { getUserInfo } from '../server/action/users';
 import { registerCourseApi } from '../server/action/course';
 import styles from '../assets/css/Pages/chitietkhoahoc.module.css';
 import title from '../assets/css/Components/title.module.css';
+import Link from 'next/link';
 const Detail = (props) => {
     const { chiTietKh } = props;
     const router = useRouter();
@@ -30,11 +31,18 @@ const Detail = (props) => {
                 <h1 className={`${title.title_content} container`}>Thông tin khoá học</h1>
             </div>
             <div className='container'>
+                {/* Link về trang trước */}
+                <div className={styles.breadcrumb}>
+                    <Link href="/khoahoc">Khoá học</Link>
+                    <i className={`fa fa-angle-right ${styles.separator}`}></i>
+                    <Link href="#">{chiTietKh?.tenKhoaHoc || 'N/A'}</Link>
+                </div>
+                {/* Content */}
                 <div className={`${styles.detailContent} row d-flex justify-content-center`}>
                     <div className={`${styles.detailLeft} col-12 col-md-8`}>
                         {/* Title 1 */}
                         <div className={`${title.title2}`}>
-                            <h3 className={`${title.title_content}`}>{chiTietKh?.tenKhoaHoc || 'N/A'}</h3>
+                            <h3 className={`${title.title_content} text-start`}>{chiTietKh?.tenKhoaHoc || 'N/A'}</h3>
                         </div>
                         {/* Content */}
                         <p>
@@ -210,7 +218,7 @@ const Detail = (props) => {
                                             <li>Khóa học tiêu tốn của bạn 120 giờ và làm hao hụt 7.800.000Đ trong nguồn tài chính</li>
                                             <li>Chúng tôi sẽ <strong>linh hoạt quỹ thời gian</strong>&nbsp;cho bạn trong trường hợp có sự gián đoạn khi tham gia khóa học</li>
                                             <li>
-                                                Hỗ trợ &nbsp;<strong><span style={{ color: '#ff0000;' }}>1.100.000đ học phí</span></strong>&nbsp;khi bạn đăng ký online và hoàn tất trước hạn, <strong>học phí chính thức 6.700.000đ</strong></li>
+                                                Hỗ trợ &nbsp;<strong><span style={{ color: '#ff0000' }}>1.100.000đ học phí</span></strong>&nbsp;khi bạn đăng ký online và hoàn tất trước hạn, <strong>học phí chính thức 6.700.000đ</strong></li>
                                         </ul>
                                     </div>
                                 </div>

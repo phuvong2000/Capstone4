@@ -23,3 +23,10 @@
 .title2 .title_content span {
     color: #00CBB8; 
 }
+
+/* Reponsive title */
+@media screen and (max-width: 768px) {
+    .title2 .title_content {
+        font-size: 25px;
+    }
+}
