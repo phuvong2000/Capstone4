@@ -38,6 +38,12 @@ Dự án E-learning là một nền tảng học trực tuyến cho phép ngư�
 - **Quản lý trạng thái:**
   - React hooks (`useState`, `useEffect`)
 
+## Đường dẫn trang web: 
+[Truy cập trang chủ dự án](https://capstone4-psi.vercel.app/)
+
+## Video demo dự án 
+[Truy cập video demo dự án](https://www.youtube.com/watch?v=jq4uoys1lcc)
+
 ## Cài Đặt
 
 ### Yêu Cầu Hệ Thống
