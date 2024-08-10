@@ -22,6 +22,12 @@ Dự án E-learning là một nền tảng học trực tuyến cho phép ngư�
 - **Quản lý người dùng:** Người dùng có thể thêm tài khoản, sửa, xoá (nếu tài khoản đó chưa có đăng ký khoá học nào), đăng ký khoá học cho tài khoản, huỷ ghi danh học viên,...
 - **Thông tin tài khoản:** Người dùng có thể xem và cập nhật thông tin cá nhân.
 
+## Đường dẫn trang web: 
+[Truy cập trang chủ dự án](https://capstone4-psi.vercel.app/)
+
+## Video demo dự án 
+[Truy cập video demo dự án](https://www.youtube.com/watch?v=jq4uoys1lcc)
+
 ## Công Nghệ Sử Dụng
 
 - **Frontend:**
@@ -37,12 +43,6 @@ Dự án E-learning là một nền tảng học trực tuyến cho phép ngư�
   - JWT (JSON Web Token) cho việc xác thực người dùng
 - **Quản lý trạng thái:**
   - React hooks (`useState`, `useEffect`)
-
-## Đường dẫn trang web: 
-[Truy cập trang chủ dự án](https://capstone4-psi.vercel.app/)
-
-## Video demo dự án 
-[Truy cập video demo dự án](https://www.youtube.com/watch?v=jq4uoys1lcc)
 
 ## Cài Đặt
 
